@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Presentation\\WMS.Presentation.csproj": {}
+    "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\WMS.Presentation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Application\\WMS.Application.csproj": {
+    "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\WMS.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Application\\WMS.Application.csproj",
+        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\WMS.Application.csproj",
         "projectName": "WMS.Application",
-        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Application\\WMS.Application.csproj",
+        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\WMS.Application.csproj",
         "packagesPath": "C:\\Users\\ahmda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Application\\obj\\",
+        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ahmda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,8 +29,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj": {
-                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj"
+              "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj": {
+                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj"
               }
             }
           }
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj": {
+    "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj",
         "projectName": "WMS.Domain",
-        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj",
+        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj",
         "packagesPath": "C:\\Users\\ahmda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\obj\\",
+        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ahmda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -130,14 +130,14 @@
         }
       }
     },
-    "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj": {
+    "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj",
         "projectName": "WMS.Infrastructure",
-        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ahmda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ahmda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -155,8 +155,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj": {
-                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Domain\\WMS.Domain.csproj"
+              "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj": {
+                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\WMS.Domain.csproj"
               }
             }
           }
@@ -175,6 +175,26 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.24, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.24, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -195,14 +215,14 @@
         }
       }
     },
-    "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Presentation\\WMS.Presentation.csproj": {
+    "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\WMS.Presentation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Presentation\\WMS.Presentation.csproj",
+        "projectUniqueName": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\WMS.Presentation.csproj",
         "projectName": "WMS.Presentation",
-        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Presentation\\WMS.Presentation.csproj",
+        "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\WMS.Presentation.csproj",
         "packagesPath": "C:\\Users\\ahmda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Presentation\\obj\\",
+        "outputPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ahmda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -220,11 +240,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Application\\WMS.Application.csproj": {
-                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Application\\WMS.Application.csproj"
+              "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\WMS.Application.csproj": {
+                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\WMS.Application.csproj"
               },
-              "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj"
+              "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\WMS.Infrastructure.csproj"
               }
             }
           }

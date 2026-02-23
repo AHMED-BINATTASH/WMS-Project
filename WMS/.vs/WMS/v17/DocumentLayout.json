@@ -1,7 +1,24 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ahmda\\Desktop\\WMS\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.domain\\entities\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|solutionrelative:wms.domain\\entities\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.domain\\entities\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|solutionrelative:wms.domain\\entities\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|solutionrelative:wms.domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7846F8F7-573A-4F4C-9A9F-16E6A3496C33}|WMS.Presentation\\WMS.Presentation.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7846F8F7-573A-4F4C-9A9F-16E6A3496C33}|WMS.Presentation\\WMS.Presentation.csproj|solutionrelative:wms.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 1,
@@ -9,8 +26,21 @@
       "DocumentGroups": [
         {
           "DockedHeight": 181,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "WMS.Domain\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\User.cs",
+              "RelativeToolTip": "WMS.Domain\\Entities\\User.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T20:26:22.723Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -18,6 +48,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Person.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\Person.cs",
+              "RelativeDocumentMoniker": "WMS.Domain\\Entities\\Person.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\Person.cs",
+              "RelativeToolTip": "WMS.Domain\\Entities\\Person.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T20:26:15.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Country.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\Country.cs",
+              "RelativeDocumentMoniker": "WMS.Domain\\Entities\\Country.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\Country.cs",
+              "RelativeToolTip": "WMS.Domain\\Entities\\Country.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-23T20:26:04.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\Program.cs",
+              "RelativeDocumentMoniker": "WMS.Presentation\\Program.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\Program.cs",
+              "RelativeToolTip": "WMS.Presentation\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-21T19:08:03.092Z",
+              "EditorCaption": ""
             }
           ]
         },

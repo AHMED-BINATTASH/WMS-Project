@@ -8,10 +8,9 @@ namespace WMS.Domain.Entities
 {
     public class Country
     {
-        public int CountryID { get; private set; } // Matches diagram: int private set
+        public int CountryID { get; private set; } 
         public string CountryName { get; set; }
 
-        // Constructor as shown in diagram
         public Country(int countryID)
         {
             CountryID = countryID;
