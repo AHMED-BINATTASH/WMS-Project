@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WMS.Infrastructure.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Registring AppDbContext Option
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration["ConnectionString"],
+    b => b.MigrationsAssembly("WMS.Infrastructure")));
 
 var app = builder.Build();
 
