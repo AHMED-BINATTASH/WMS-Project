@@ -15,14 +15,14 @@ namespace WMS.Domain.Entities
         public string Role { get; set; }
         public string Password { get; set; }
         public bool IsActive { get; set; }
-       
+
+        // This constructor for EF Core to can create instance from user class
+        private User() { }
         public User(Person person, int personID ,int userID)
         {
             PersonInfo = person;
             PersonID = personID;
             UserID = userID;
         }
-
-      
     }
 }

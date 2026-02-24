@@ -13,6 +13,7 @@ namespace WMS.Domain.Entities
         public string NationalID { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FullName => $"{FirstName} {LastName}";
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -21,13 +22,13 @@ namespace WMS.Domain.Entities
         public int CountryID { get; set; }
         public Country CountryInfo { get; set; }
 
+        // This constructor for EF Core to can create instance from person class
+        private Person() { }
         public Person(Country country, int personID, string nationalID)
         {
             CountryInfo = country;
             PersonID = personID;
             NationalID = nationalID;
-
-
         }
     }
 
