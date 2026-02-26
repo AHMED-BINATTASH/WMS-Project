@@ -1,5 +1,9 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using WMS.Infrastructure.Persistence;
+using WMS.Application;
+using WMS.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,9 @@ builder.Services.AddSwaggerGen();
 // Registring AppDbContext Option
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration["ConnectionString"],
     b => b.MigrationsAssembly("WMS.Infrastructure")));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 var app = builder.Build();
 
