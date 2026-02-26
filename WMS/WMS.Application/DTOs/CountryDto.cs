@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace WMS.Application.DTOs
 {
   
-        public record CountryDto(int Id, string Name);
+        public record CountryDto(int CountryID, string CountryName);
     
 }
