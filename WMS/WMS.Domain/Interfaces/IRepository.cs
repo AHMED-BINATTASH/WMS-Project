@@ -11,8 +11,8 @@ namespace WMS.Domain.Interfaces
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
-        Task Add(T entity);
-        Task Delete(int id);
-        Task Update();
+        Task<bool> Add(T entity);
+        Task<bool> Delete(int id);
+        Task<bool> Update();
     }
 }
