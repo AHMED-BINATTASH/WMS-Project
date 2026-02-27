@@ -14,6 +14,7 @@ namespace WMS.Application.Mappings
         public CountryProfile()
         {
             CreateMap<Country , CountryDto>();
+            CreateMap<CountryDto , Country>();
         }
     }
 }
