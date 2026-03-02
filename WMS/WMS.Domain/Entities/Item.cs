@@ -41,7 +41,7 @@ namespace WMS.Domain.Entities
         // Methods
         public void SoftDelete()
         {
-            this.IsActive = false;
+            // it will be avelable soon 
         }
     }
 }
