@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    internal class UserService : IService<UserDto>
+    public class UserService : IService<UserDto>
     {
         private readonly IRepository<User> _repository;
         private readonly IMapper _mapper;
