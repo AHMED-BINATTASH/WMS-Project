@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace WMS.Application.DTOs
 {
-    public record Unit(int UnitID, string UnitName, string UnitSymbol);
+    public record UnitDto(int UnitID, string UnitName, string UnitSymbol);
 }
