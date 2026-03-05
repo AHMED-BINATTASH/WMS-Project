@@ -15,7 +15,7 @@ namespace WMS.Domain.Entities
         public string Location { get; set; }
         public bool IsActive { get; set; }
 
-        // This constructor for EF Core to can create instance from Item class
+        // This constructor for EF Core to can create instance from Warehouse class
         private Warehouse() { }
        
         public Warehouse(int warehouseID)

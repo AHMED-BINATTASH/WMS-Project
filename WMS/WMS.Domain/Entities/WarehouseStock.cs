@@ -19,6 +19,9 @@ namespace WMS.Domain.Entities
         public DateTime ProductionDate { get; set; }
         public DateTime ExpiryDate { get; set; }
 
+        // This constructor for EF Core to can create instance from  WarehouseStock class
+        private WarehouseStock() { }
+
         public WarehouseStock(Warehouse warehouse, Item item)
         {
             this.WarehouseInfo = warehouse;
