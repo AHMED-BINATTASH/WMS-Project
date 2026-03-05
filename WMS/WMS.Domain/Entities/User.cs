@@ -18,10 +18,10 @@ namespace WMS.Domain.Entities
 
         // This constructor for EF Core to can create instance from user class
         private User() { }
-        public User(Person person, int personID ,int userID)
+        public User(Person person,int userID)
         {
             PersonInfo = person;
-            PersonID = personID;
+            PersonID = person.PersonID;
             UserID = userID;
         }
     }

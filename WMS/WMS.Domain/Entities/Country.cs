@@ -11,6 +11,9 @@ namespace WMS.Domain.Entities
         public int CountryID { get; private set; } 
         public string CountryName { get; set; }
 
+        // This constructor for EF Core to can create instance from Country class
+        private Country() { }
+
         public Country(int countryID)
         {
             CountryID = countryID;

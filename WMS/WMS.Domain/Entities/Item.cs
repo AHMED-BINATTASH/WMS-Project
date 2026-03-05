@@ -27,13 +27,12 @@ namespace WMS.Domain.Entities
         private Item() { }
 
         // Constructor
-        public Item(Category category, Unit unit, int itemID)
+        public Item(Category category, Unit unit)
         {
             this.CategoryInfo = category;
             this.CategoryID = category.CategoryID;
             this.UnitInfo = unit;
             this.UnitID = unit.UnitID;
-            this.ItemID = itemID;
             this.IsActive = true;
             this.CreatedAt = DateTime.Now;
         }

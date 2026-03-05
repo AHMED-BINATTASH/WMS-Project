@@ -27,6 +27,7 @@ namespace WMS.Domain.Entities
         public Person(Country country, int personID, string nationalID)
         {
             CountryInfo = country;
+            CountryID = country.CountryID;
             PersonID = personID;
             NationalID = nationalID;
         }
