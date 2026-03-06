@@ -13,6 +13,6 @@ namespace WMS.Domain.Interfaces
         Task<T> GetByIdAsync(int id);
         Task<bool> Add(T entity);
         Task<bool> Delete(int id);
-        Task<bool> Update();
+        Task<bool> Update(T entity);
     }
 }
