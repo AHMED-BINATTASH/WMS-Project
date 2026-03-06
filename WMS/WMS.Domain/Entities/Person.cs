@@ -13,7 +13,7 @@ namespace WMS.Domain.Entities
         public string NationalID { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string FullName => $"{FirstName} {LastName}";
+        //public string FullName => $"{FirstName} {LastName}";
         public string Address { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
@@ -27,6 +27,7 @@ namespace WMS.Domain.Entities
         public Person(Country country, int personID, string nationalID)
         {
             CountryInfo = country;
+            CountryID = country.CountryID;
             PersonID = personID;
             NationalID = nationalID;
         }

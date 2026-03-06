@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\WMS.Presentation.props" />
-</Project>
