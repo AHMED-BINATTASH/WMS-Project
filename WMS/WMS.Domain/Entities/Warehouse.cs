@@ -22,10 +22,5 @@ namespace WMS.Domain.Entities
         {
             WarehouseID = warehouseID;
         }
-      
-        public void SoftDelete()
-        {
-            // it will avarable soon
-        }
     }
 }

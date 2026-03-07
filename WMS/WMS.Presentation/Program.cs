@@ -1,20 +1,15 @@
-<<<<<<< HEAD
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-=======
 using AutoMapper;
->>>>>>> ac19846bd93b067af162a7dabd8eb20841b7dc97
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WMS.Infrastructure.Persistence;
-<<<<<<< HEAD
 using Microsoft.IdentityModel.Tokens;
 using WMS.Presentation.Utilities;
 using System.Text;
 
-=======
 using WMS.Application;
 using WMS.Application.Mappings;
->>>>>>> ac19846bd93b067af162a7dabd8eb20841b7dc97
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +24,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration["ConnectionString"],
     b => b.MigrationsAssembly("WMS.Infrastructure")));
 
-<<<<<<< HEAD
 var jwtOptions = builder.Configuration.GetSection("JWT").Get<JWTSettings>();
 
 builder.Services.AddSingleton<JWTSettings>(jwtOptions);
@@ -57,11 +51,8 @@ builder.Services.AddAuthentication()
 );
 
 builder.Services.AddAuthorization();
-=======
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-
->>>>>>> ac19846bd93b067af162a7dabd8eb20841b7dc97
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

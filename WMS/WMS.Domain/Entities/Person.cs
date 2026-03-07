@@ -32,5 +32,4 @@ namespace WMS.Domain.Entities
             NationalID = nationalID;
         }
     }
-
 }
