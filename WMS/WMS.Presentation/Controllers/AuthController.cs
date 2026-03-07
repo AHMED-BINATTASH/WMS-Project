@@ -9,9 +9,9 @@ namespace WMS.Presentation.Controllers
     {
         [HttpPost]
         [Route("Login")]
-        public ActionResult<object> Login([FromBody]string username,[FromBody]string password)
+        public ActionResult<object> Login(object d)
         {
-            var obj = new { username, password };
+            var obj = d;
             return obj;
         }
     }

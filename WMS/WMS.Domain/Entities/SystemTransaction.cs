@@ -7,7 +7,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Domain.Entities
 {
-    public class SystemTransaction : ITransaction
+    public class SystemTransaction 
     {
         public int TransactionID { get; private set; }
         public int WarehouseID { get; private set; }
@@ -18,7 +18,7 @@ namespace WMS.Domain.Entities
         public Warehouse WarehouseInfo { get; set; }
         public Item ItemInfo { get; set; }
         public TransactionType TransactionTypeInfo { get; set; }
-        public User UserInfo { get; set; }
+        public User CreatorInfo { get; set; }
 
         public int Quantity { get; set; }
         public decimal RunningBalance { get; set; }
@@ -38,15 +38,9 @@ namespace WMS.Domain.Entities
             this.ItemInfo = item;
             this.TransactionTypeInfo = type;
             this.TransactionTypeID = type.TransactionTypeID;
-            this.UserInfo = user;
+            this.CreatorInfo = user;
             this.CreatedBy = user.UserID; 
             this.CreatedAt = DateTime.Now;
-        }
-
-        public bool Save()
-        {
-            // it will Implement soon
-            return false;
         }
     }
 }

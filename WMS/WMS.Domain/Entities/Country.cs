@@ -18,7 +18,5 @@ namespace WMS.Domain.Entities
         {
             CountryID = countryID;
         }
-
-      
     }
 }

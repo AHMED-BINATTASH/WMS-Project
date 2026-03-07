@@ -8,7 +8,6 @@ namespace WMS.Domain.Entities
 {
     public class Item
     {
-        // Properties
         public int ItemID { get; private set; }
         public string ItemName { get; set; }
         public string Barcode { get; set; }
@@ -22,6 +21,7 @@ namespace WMS.Domain.Entities
         public bool IsExpiryRelated { get; set; }
         public DateTime CreatedAt { get; set; }
         public int CreatedBy { get; set; }
+        public User CeatorInfo { get; set; }
 
         // This constructor for EF Core to can create instance from Item class
         private Item() { }
@@ -35,12 +35,6 @@ namespace WMS.Domain.Entities
             this.UnitID = unit.UnitID;
             this.IsActive = true;
             this.CreatedAt = DateTime.Now;
-        }
-
-        // Methods
-        public void SoftDelete()
-        {
-            // it will be avelable soon 
         }
     }
 }
