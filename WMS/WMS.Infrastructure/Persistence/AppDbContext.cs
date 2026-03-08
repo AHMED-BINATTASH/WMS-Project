@@ -16,6 +16,8 @@ namespace WMS.Infrastructure.Persistence
         public DbSet<Country> Countries { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<AuditItem>  AuditItems { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

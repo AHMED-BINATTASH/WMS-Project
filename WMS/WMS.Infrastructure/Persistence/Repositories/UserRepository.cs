@@ -1,0 +1,70 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WMS.Domain.Entities;
+using WMS.Domain.Interfaces;
+
+namespace WMS.Infrastructure.Persistence.Repositories
+{
+    internal class UserRepository : IRepository<User>
+    {
+        private readonly AppDbContext _dbContext;
+
+        public UserRepository(AppDbContext dbContext)
+        {_dbContext = dbContext;}
+
+        public async Task<bool> Add(User entity)
+        {
+            if (entity == null)
+                return false;
+
+            _dbContext.Users.Add(entity);
+
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            User user = await _dbContext.Users.FindAsync(id);
+
+            if (user == null) 
+                return false;
+
+            _dbContext.Remove(user);
+
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _dbContext.Users.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<User> GetByIdAsync(int id)
+        {
+            User user = await _dbContext.Users.FindAsync(id);
+
+            return user;
+        }
+
+        public async Task<bool> Update(User entity)
+        {
+            if (entity == null)
+                return false;
+
+            User user = await _dbContext.Users.FindAsync(entity.UserID);
+
+            if (user == null)
+                return false;
+
+            _dbContext.Entry(user).CurrentValues.SetValues(entity);
+            
+            user.PersonInfo = entity.PersonInfo;
+
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+    }
+}
