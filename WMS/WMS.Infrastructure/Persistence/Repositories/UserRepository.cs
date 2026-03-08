@@ -45,9 +45,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
         public async Task<User> GetByIdAsync(int id)
         {
-            User user = await _dbContext.Users.FindAsync(id);
-
-            return user;
+            return await _dbContext.Users.FindAsync(id);
         }
 
         public async Task<bool> Update(User entity)
@@ -65,6 +63,10 @@ namespace WMS.Infrastructure.Persistence.Repositories
             user.PersonInfo = entity.PersonInfo;
 
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == username);
         }
     }
 }

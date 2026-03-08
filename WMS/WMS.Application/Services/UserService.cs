@@ -56,9 +56,9 @@ namespace WMS.Application.Services
 
         }
 
-        public Task<bool> Update()
+        public Task<bool> Update(User entity)
         {
-            throw new NotImplementedException();
+           return _repository.Update(entity);
         }
 
     }

@@ -9,10 +9,13 @@ using WMS.Domain.Entities;
 namespace WMS.Application.DTOs
 {
     public record UserDto(int UserID,
-     int PersonID,
-     Person Person,
-     string Username,
-     string Role,
-     string Password,
-     bool IsActive);
+    int PersonID,
+    Person Person,
+    string Username,
+    string RefreshTokenHash,
+    DateTime RefreshTokenExpiredAt,
+    DateTime? RefreshTokenRevokedAt,
+    string Role,
+    string Password,
+    bool IsActive);
 }
