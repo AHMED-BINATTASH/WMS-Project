@@ -3,40 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\warehousestockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\warehousestockrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.application\\services\\personservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|solutionrelative:wms.application\\services\\personservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\warehouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\warehouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.application\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|solutionrelative:wms.application\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\unitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\unitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6BB9AE9F-6B75-46CD-80FF-45D2F1E6AA47}|WMS.Domain\\WMS.Domain.csproj|solutionrelative:wms.domain\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\transactiontyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\transactiontyperepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|solutionrelative:wms.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\systemtransactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\systemtransactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.application\\interfaces\\iservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5B646DE-88C6-4A11-B5AF-554A59007C6D}|WMS.Application\\WMS.Application.csproj|solutionrelative:wms.application\\interfaces\\iservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\itemunitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\itemunitrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7846F8F7-573A-4F4C-9A9F-16E6A3496C33}|WMS.Presentation\\WMS.Presentation.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7846F8F7-573A-4F4C-9A9F-16E6A3496C33}|WMS.Presentation\\WMS.Presentation.csproj|solutionrelative:wms.presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\audititemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\audititemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|c:\\users\\ahmda\\desktop\\wms-project\\wms\\wms.infrastructure\\persistence\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EA5F090-955A-4A8C-902C-C8FB9069B5D9}|WMS.Infrastructure\\WMS.Infrastructure.csproj|solutionrelative:wms.infrastructure\\persistence\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,118 +51,92 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "WarehouseStockRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\WarehouseStockRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\WarehouseStockRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\WarehouseStockRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\WarehouseStockRepository.cs*",
-              "ViewState": "AgIAABcAAAAAAAAAAAAgwCAAAAAvAAAAAAAAAA==",
+              "Title": "PersonService.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Services\\PersonService.cs",
+              "RelativeDocumentMoniker": "WMS.Application\\Services\\PersonService.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Services\\PersonService.cs*",
+              "RelativeToolTip": "WMS.Application\\Services\\PersonService.cs*",
+              "ViewState": "AgIAACsAAAAAAAAAAAAkwDwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:28:45.511Z",
+              "WhenOpened": "2026-03-08T23:30:02.394Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "WarehouseRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\WarehouseRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\WarehouseRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\WarehouseRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\WarehouseRepository.cs*",
-              "ViewState": "AgIAABcAAAAAAAAAAAAgwCAAAAAqAAAAAAAAAA==",
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Services\\CategoryService.cs",
+              "RelativeDocumentMoniker": "WMS.Application\\Services\\CategoryService.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Services\\CategoryService.cs",
+              "RelativeToolTip": "WMS.Application\\Services\\CategoryService.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAkwDkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:28:38.015Z",
+              "WhenOpened": "2026-03-08T23:29:30.571Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UnitRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\UnitRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\UnitRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\UnitRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\UnitRepository.cs*",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwCAAAAAlAAAAAAAAAA==",
+              "Title": "Category.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\Category.cs",
+              "RelativeDocumentMoniker": "WMS.Domain\\Entities\\Category.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Domain\\Entities\\Category.cs",
+              "RelativeToolTip": "WMS.Domain\\Entities\\Category.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:28:27.266Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TransactionTypeRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\TransactionTypeRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\TransactionTypeRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\TransactionTypeRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\TransactionTypeRepository.cs*",
-              "ViewState": "AgIAABcAAAAAAAAAAAAgwCAAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:28:16.592Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SystemTransactionRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\SystemTransactionRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\SystemTransactionRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\SystemTransactionRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\SystemTransactionRepository.cs*",
-              "ViewState": "AgIAABoAAAAAAAAAAAAgwCAAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:28:05.859Z",
+              "WhenOpened": "2026-03-08T23:29:18.841Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "ItemUnitRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\ItemUnitRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\ItemUnitRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\ItemUnitRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\ItemUnitRepository.cs*",
-              "ViewState": "AgIAABwAAAAAAAAAAAAkwCAAAAApAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\Program.cs",
+              "RelativeDocumentMoniker": "WMS.Presentation\\Program.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Presentation\\Program.cs",
+              "RelativeToolTip": "WMS.Presentation\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:27:55.133Z",
+              "WhenOpened": "2026-03-08T23:28:26.181Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IService.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Interfaces\\IService.cs",
+              "RelativeDocumentMoniker": "WMS.Application\\Interfaces\\IService.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Interfaces\\IService.cs*",
+              "RelativeToolTip": "WMS.Application\\Interfaces\\IService.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T23:27:45.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "WMS.Application\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Application\\Services\\UserService.cs*",
+              "RelativeToolTip": "WMS.Application\\Services\\UserService.cs*",
+              "ViewState": "AgIAACgAAAAAAAAAAAA5wDwAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-08T23:27:34.451Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "ItemRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\ItemRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\ItemRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\ItemRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\ItemRepository.cs*",
-              "ViewState": "AgIAABoAAAAAAAAAAAAgwCAAAAAlAAAAAAAAAA==",
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\UserRepository.cs",
+              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\UserRepository.cs",
+              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\UserRepository.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA1wEQAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:27:42.836Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CategoryRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs*",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\CategoryRepository.cs*",
-              "ViewState": "AgIAABIAAAAAAAAAAAAYwCAAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T22:27:27.991Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "AuditItemRepository.cs",
-              "DocumentMoniker": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\AuditItemRepository.cs",
-              "RelativeDocumentMoniker": "WMS.Infrastructure\\Persistence\\Repositories\\AuditItemRepository.cs",
-              "ToolTip": "C:\\Users\\ahmda\\Desktop\\WMS-Project\\WMS\\WMS.Infrastructure\\Persistence\\Repositories\\AuditItemRepository.cs",
-              "RelativeToolTip": "WMS.Infrastructure\\Persistence\\Repositories\\AuditItemRepository.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAowEgAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T21:33:23.687Z",
+              "WhenOpened": "2026-03-08T22:29:06.669Z",
               "EditorCaption": ""
             }
           ]

@@ -54,9 +54,9 @@ namespace WMS.Application.Services
             return Category != null ? _mapper.Map<CategoryDto>(Category) : null;
         }
 
-        public Task<bool> Update()
+        public Task<bool> Update(Category entity)
         {
-            throw new NotImplementedException();
+            return _repository.Update(entity);
         }
     }
 }
