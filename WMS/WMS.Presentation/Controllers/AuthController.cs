@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using WMS.Application.Interfaces;
+using WMS.Domain.Entities;
+using WMS.Domain.Interfaces;
 
 namespace WMS.Presentation.Controllers
 {
@@ -7,12 +10,19 @@ namespace WMS.Presentation.Controllers
     [Route("api/Auth")]
     public class AuthController
     {
+        private readonly IUserService _userService;
+
+        public AuthController(IUserService userService)
+        {
+            _userService = userService;
+        }
         [HttpPost]
         [Route("Login")]
-        public ActionResult<object> Login(object d)
+        public async ActionResult<object> Login(User d)
         {
-            var obj = d;
-            return obj;
+            User user = await _userService.GetByUsername(d.Username);
+
+            user.Username = d.Username;
         }
     }
 }
