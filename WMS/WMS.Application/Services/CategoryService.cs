@@ -68,7 +68,7 @@ namespace WMS.Application.Services
 
             existingCategory.CategoryName = Entity.CategoryName;
             existingCategory.Description = Entity.Description;
-            existingCategory.ParentCategory = Entity.ParentCategory;
+            existingCategory.ParentCategoryId = Entity.ParentCategoryId;
 
             return await _repository.Update(existingCategory);
         }
