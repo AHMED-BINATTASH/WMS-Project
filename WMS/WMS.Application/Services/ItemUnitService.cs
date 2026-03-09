@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class ItemUnitService : IService<ItemUnitDto>
+    public class ItemUnitService : IService<ItemUnitDto, ItemUnit>
     {
         private readonly IRepository<ItemUnit> _repository;
         private readonly IMapper _mapper;
@@ -22,13 +22,11 @@ namespace WMS.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> AddNew(ItemUnitDto entity)
+        public async Task<bool> AddNew(ItemUnit entity)
         {
             if (entity == null)
                 return false;
-
-            var itemUnit = _mapper.Map<ItemUnit>(entity);
-            var isAdded = await _repository.Add(itemUnit);
+            var isAdded = await _repository.Add(entity);
 
             return isAdded;
         }
@@ -57,9 +55,22 @@ namespace WMS.Application.Services
                 : null;
         }
 
-        public Task<bool> Update()
+        async public Task<bool> Update(ItemUnit Entity)
         {
-            throw new NotImplementedException();
+            if (Entity == null)
+                return false;
+
+            var existingItemUnit= await _repository.GetByIdAsync(Entity.ItemUnitID);
+
+            if (existingItemUnit == null)
+                return false;
+
+            existingItemUnit.UnitID= Entity.UnitID;
+            existingItemUnit.ItemID= Entity.ItemID;
+            existingItemUnit.Factor= Entity.Factor;
+
+            return await _repository.Update(existingItemUnit);
+
         }
     }
 }
