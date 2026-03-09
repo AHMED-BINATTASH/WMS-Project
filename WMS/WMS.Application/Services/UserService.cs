@@ -13,15 +13,13 @@ namespace WMS.Application.Services
 {
     public class UserService : IService<UserDto>
     {
-        private readonly IRepository<User> _repository;
+        private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
-        public UserService(IRepository<User> repository, IMapper mapper)
+        public UserService(IUserRepository repository, IMapper mapper)
         {
             _mapper = mapper;
             _repository = repository;
         }
-
-
 
         async public Task<IEnumerable<UserDto>?> GetAll()
         {
@@ -38,13 +36,12 @@ namespace WMS.Application.Services
             return User != null ? _mapper.Map<UserDto>(User) : null;
         }
 
-        async public Task<bool> AddNew(UserDto Entity)
+        async public Task<bool> AddNew(User Entity)
         {
             if (Entity == null)
                 return false;
 
-            var User = _mapper.Map<User>(Entity);
-            var IsAdded = await _repository.Add(User);
+            var IsAdded = await _repository.Add(Entity);
 
             return IsAdded;
         }
@@ -56,10 +53,14 @@ namespace WMS.Application.Services
 
         }
 
-        public Task<bool> Update(User entity)
+        public async Task<bool> Update(UserDto entity)
         {
-           return _repository.Update(entity);
+           return await _repository.Update(_mapper.Map<User>(entity));
         }
 
+        public async Task<User> GetByUsername(string username)
+        {
+           return await _repository.GetByUsernameAsync(username);
+        }
     }
 }
