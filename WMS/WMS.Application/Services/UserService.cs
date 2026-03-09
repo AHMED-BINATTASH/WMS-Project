@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class UserService : IService<UserDto>
+    public class UserService : IService<UserDto, User>
     {
         private readonly IRepository<User> _repository;
         private readonly IMapper _mapper;
@@ -38,13 +38,12 @@ namespace WMS.Application.Services
             return User != null ? _mapper.Map<UserDto>(User) : null;
         }
 
-        async public Task<bool> AddNew(UserDto Entity)
+        async public Task<bool> AddNew(User Entity)
         {
             if (Entity == null)
                 return false;
 
-            var User = _mapper.Map<User>(Entity);
-            var IsAdded = await _repository.Add(User);
+            var IsAdded = await _repository.Add(Entity);
 
             return IsAdded;
         }
@@ -56,10 +55,22 @@ namespace WMS.Application.Services
 
         }
 
-        public Task<bool> Update()
+        async public Task<bool> Update(User Entity)
         {
-            throw new NotImplementedException();
-        }
+            if (Entity == null)
+                return false;
 
+            var existingUser = await _repository.GetByIdAsync(Entity.UserID);
+
+            if (existingUser == null)
+                return false;
+
+            existingUser.Username = Entity.Username;
+            existingUser.Password = Entity.Password;
+            existingUser.IsActive = Entity.IsActive;
+            existingUser.Role= Entity.Role;
+
+            return await _repository.Update(existingUser);
+        }
     }
 }
