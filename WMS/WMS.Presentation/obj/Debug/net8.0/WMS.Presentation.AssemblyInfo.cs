@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WMS.Presentation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57d008492322f182a0b1899f90bb1d86017aa2bf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a714cec7927853390f34a339ba5156adcc1a44ec")]
 [assembly: System.Reflection.AssemblyProductAttribute("WMS.Presentation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WMS.Presentation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
