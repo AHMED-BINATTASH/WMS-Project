@@ -38,6 +38,8 @@ namespace WMS.Application.Services
             return User != null ? _mapper.Map<UserDto>(User) : null;
         }
 
+    
+
         async public Task<bool> AddNew(User Entity)
         {
             if (Entity == null)
@@ -68,7 +70,7 @@ namespace WMS.Application.Services
             existingUser.Username = Entity.Username;
             existingUser.Password = Entity.Password;
             existingUser.IsActive = Entity.IsActive;
-            existingUser.Role= Entity.Role;
+            existingUser.Role = Entity.Role;
 
             return await _repository.Update(existingUser);
         }
