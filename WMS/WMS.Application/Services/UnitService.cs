@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class UnitService : IService<UnitDto>
+    public class UnitService : IService<UnitDto,Unit>
     {
 
         private readonly IRepository<Unit> _repository;
@@ -22,14 +23,12 @@ namespace WMS.Application.Services
             _repository = repository;
         }
 
-        async public Task<bool> AddNew(UnitDto Entity)
+        async public Task<bool> AddNew(Unit Entity)
         {
             if (Entity == null)
                 return false;
 
-            var Unit = _mapper.Map<Unit>(Entity);
-
-            bool IsAdded = await _repository.Add(Unit);
+            bool IsAdded = await _repository.Add(Entity);
 
             return IsAdded;
 
@@ -53,9 +52,19 @@ namespace WMS.Application.Services
             return Unit!=null? _mapper.Map<UnitDto>(Unit) : null;
         }
 
-        public Task<bool> Update()
+       async public Task<bool> Update(Unit Entity)
         {
-            throw new NotImplementedException();
+            if (Entity == null)
+                return false;
+            var existingUint = await _repository.GetByIdAsync(Entity.UnitID);
+
+            if (existingUint == null)
+                return false;
+
+            existingUint.UnitName = Entity.UnitName;
+            existingUint.UnitSymbol = Entity.UnitSymbol;
+
+            return await _repository.Update(Entity);
         }
     }
 }
