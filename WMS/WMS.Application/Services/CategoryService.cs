@@ -12,7 +12,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class CategoryService : IService<CategoryDto>
+    public class CategoryService : IService<CategoryDto, Category>
     {
         private readonly IRepository<Category> _repository;
         private readonly IMapper _mapper;
@@ -22,17 +22,18 @@ namespace WMS.Application.Services
             _repository = repository;
         }
 
-        public async Task<bool> AddNew(CategoryDto Entity)
+        public async Task<bool> AddNew(Category Entity)
         {
             if (Entity == null)
                 return false;
 
-            var Category = _mapper.Map<Category>(Entity);
-            var IsAdded = await _repository.Add(Category);
+
+            var IsAdded = await _repository.Add(Entity);
             return IsAdded;
 
 
         }
+
 
         public async Task<bool> Delete(int id)
         {
@@ -54,9 +55,22 @@ namespace WMS.Application.Services
             return Category != null ? _mapper.Map<CategoryDto>(Category) : null;
         }
 
-        public Task<bool> Update()
+
+        async public Task<bool> Update(Category Entity)
         {
-            throw new NotImplementedException();
+            if (Entity == null)
+                return false;
+
+            var existingCategory = await _repository.GetByIdAsync(Entity.CategoryID);
+
+            if (existingCategory == null)
+                return false;
+
+            existingCategory.CategoryName = Entity.CategoryName;
+            existingCategory.Description = Entity.Description;
+            existingCategory.ParentCategory = Entity.ParentCategory;
+
+            return await _repository.Update(existingCategory);
         }
     }
 }
