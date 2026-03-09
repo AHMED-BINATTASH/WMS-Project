@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class PersonService : IService<PersonDto>
+    public class PersonService : IService<PersonDto, Person>
     {
         private readonly IRepository<Person> _repository;
         private readonly IMapper _mapper;
@@ -38,13 +38,12 @@ namespace WMS.Application.Services
             return Person != null ? _mapper.Map<PersonDto>(Person) : null;
         }
 
-        async public Task<bool> AddNew(PersonDto Entity)
+        async public Task<bool> AddNew(Person Entity)
         {
             if (Entity == null)
                 return false;
 
-            var person = _mapper.Map<Person>(Entity);
-            var IsAdded = await _repository.Add(person);
+            var IsAdded = await _repository.Add(Entity);
 
             return IsAdded;
         }
@@ -61,6 +60,24 @@ namespace WMS.Application.Services
             throw new NotImplementedException();
         }
 
+        async public Task<bool> Update(Person Entity)
+        {
+            if (Entity == null)
+                return false;
+            var existingPerson = await _repository.GetByIdAsync(Entity.PersonID);
 
+            if (existingPerson == null)
+                return false;
+
+            existingPerson.FirstName = Entity.FirstName;
+            existingPerson.LastName = Entity.LastName;
+            existingPerson.Email = Entity.Email;
+            existingPerson.Phone = Entity.Phone;
+            existingPerson.Address = Entity.Address;
+            existingPerson.CountryID = Entity.CountryID;
+
+
+            return await _repository.Update(existingPerson);
+        }
     }
 }
