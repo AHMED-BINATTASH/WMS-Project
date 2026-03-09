@@ -10,7 +10,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class ItemService : IService<ItemDto>
+    public class ItemService : IService<ItemDto,Item>
     {
         private readonly IRepository<Item> _repository;
         private readonly IMapper _mapper;
@@ -21,13 +21,14 @@ namespace WMS.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> AddNew(ItemDto entity)
-        {
-            if (entity == null)
-                return false;
+  
 
-            var item = _mapper.Map<Item>(entity);
-            var isAdded = await _repository.Add(item);
+       async public Task<bool> AddNew(Item Entity)
+        {
+            if (Entity == null)
+                return false;
+            
+            var isAdded = await _repository.Add(Entity);
 
             return isAdded;
         }
@@ -56,9 +57,31 @@ namespace WMS.Application.Services
                 : null;
         }
 
-        public Task<bool> Update()
+      
+
+     async   public Task<bool> Update(Item Entity)
         {
-            throw new NotImplementedException();
+            if (Entity == null)
+                return false;
+
+            var existingItem = await _repository.GetByIdAsync(Entity.ItemID);
+
+            if (existingItem == null)
+                return false;
+
+            existingItem.ItemName = Entity.ItemName;
+            existingItem.Barcode = Entity.Barcode;
+            existingItem.ReorderPoint=Entity.ReorderPoint;
+            existingItem.AverageCost=Entity.AverageCost;
+            existingItem.IsActive=Entity.IsActive;
+            existingItem.IsExpiryRelated=Entity.IsExpiryRelated;
+            existingItem.CreatedBy=Entity.CreatedBy;
+            existingItem.CreatedAt=Entity.CreatedAt;
+
+
+            return await _repository.Update(existingItem);
+
+
         }
     }
 }

@@ -7,12 +7,14 @@ using WMS.Application.DTOs;
 
 namespace WMS.Application.Interfaces
 {
-    public interface IService<T> where T : class
+    public interface IService<TDto , TEntity> 
+        where TDto : class 
+        where TEntity : class
     {
-        Task<IEnumerable<T>?> GetAll();
-        Task<T?> GetByID(int id);
-        Task<bool> AddNew(T Entity);
+        Task<IEnumerable<TDto>?> GetAll();
+        Task<TDto?> GetByID(int id);
+        Task<bool> AddNew(TEntity Entity);
         Task<bool> Delete(int id);
-        Task<bool> Update(T entity);
+        Task<bool> Update(TEntity Entity);
     }
 }

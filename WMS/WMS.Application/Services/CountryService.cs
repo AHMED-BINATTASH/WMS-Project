@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class CountryService : IService<CountryDto>
+    public class CountryService : IService<CountryDto, Country>
     {
         private readonly IRepository<Country> _repository;
         private readonly IMapper _mapper;
@@ -22,12 +22,11 @@ namespace WMS.Application.Services
         }
 
 
-
         async public Task<IEnumerable<CountryDto>?> GetAll()
         {
-            var People = await _repository.GetAllAsync();
+            var countries = await _repository.GetAllAsync();
 
-            return People != null ? _mapper.Map<IEnumerable<CountryDto>>(People) : null;
+            return countries != null ? _mapper.Map<IEnumerable<CountryDto>>(countries) : null;
         }
 
         async public Task<CountryDto?> GetByID(int id)
@@ -38,16 +37,7 @@ namespace WMS.Application.Services
             return Country != null ? _mapper.Map<CountryDto>(Country) : null;
         }
 
-        async public Task<bool> AddNew(CountryDto Entity)
-        {
-            if (Entity == null)
-                return false;
 
-            var Country = _mapper.Map<Country>(Entity);
-            var IsAdded = await _repository.Add(Country);
-
-            return IsAdded;
-        }
 
         async public Task<bool> Delete(int id)
         {
@@ -56,9 +46,29 @@ namespace WMS.Application.Services
 
         }
 
-        public Task<bool> Update()
+        async public Task<bool> AddNew(Country Entity)
         {
-            throw new NotImplementedException();
+            if (Entity == null)
+                return false;
+
+            return await _repository.Add(Entity); ;
+        }
+
+        async public Task<bool> Update(Country Entity)
+        {
+
+            if (Entity == null)
+                return false;
+
+            var existingCountry = await _repository.GetByIdAsync(Entity.CountryID);
+
+            if (existingCountry == null)
+                return false;
+
+            existingCountry.CountryName = Entity.CountryName;
+           
+
+            return await _repository.Update(existingCountry);
         }
     }
 }
