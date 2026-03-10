@@ -24,6 +24,12 @@ namespace WMS.Infrastructure.Configurations
 
             builder.Property(u => u.IsActive).HasColumnType("BIT").HasDefaultValue(true).IsRequired();
 
+            builder.Property(u => u.RefreshTokenHash).IsRequired(false);
+
+            builder.Property(u => u.RefreshTokenExpiredAt).HasColumnType("DATETIME").IsRequired(false);
+
+            builder.Property(u => u.RefreshTokenRevokedAt).HasColumnType("DATETIME").IsRequired(false);
+
             builder.HasOne(u => u.PersonInfo)
                 .WithOne()
                 .HasForeignKey<User>(u => u.PersonID);

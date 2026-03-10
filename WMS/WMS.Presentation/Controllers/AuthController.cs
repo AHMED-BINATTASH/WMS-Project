@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using WMS.Application.Interfaces;
 using WMS.Domain.Entities;
@@ -18,11 +19,9 @@ namespace WMS.Presentation.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public async ActionResult<object> Login(User d)
+        public async Task<object> Login(User d)
         {
-            User user = await _userService.GetByUsername(d.Username);
-
-            user.Username = d.Username;
+            return await _userService.GetByID(d.UserID);
         }
     }
 }

@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class UserService : IService<UserDto, User>
+    public class UserService : IUserService
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -27,50 +27,27 @@ namespace WMS.Application.Services
 
             return People != null ? _mapper.Map<IEnumerable<UserDto>>(People) : null;
         }
-
         async public Task<UserDto?> GetByID(int id)
         {
-
             var User = await _repository.GetByIdAsync(id);
 
             return User != null ? _mapper.Map<UserDto>(User) : null;
         }
-
-    
-
+        public async Task<User> GetByUsername(string username)
+        {
+            return await _repository.GetByUsernameAsync(username);
+        }
         async public Task<bool> AddNew(User Entity)
         {
-            if (Entity == null)
-                return false;
-
-            var IsAdded = await _repository.Add(Entity);
-
-            return IsAdded;
+            return await _repository.Add(Entity);
         }
-
         async public Task<bool> Delete(int id)
         {
-            var IsDeleted = await _repository.Delete(id);
-            return IsDeleted;
-
+            return await _repository.Delete(id);
         }
-
         async public Task<bool> Update(User Entity)
         {
-            if (Entity == null)
-                return false;
-
-            var existingUser = await _repository.GetByIdAsync(Entity.UserID);
-
-            if (existingUser == null)
-                return false;
-
-            existingUser.Username = Entity.Username;
-            existingUser.Password = Entity.Password;
-            existingUser.IsActive = Entity.IsActive;
-            existingUser.Role = Entity.Role;
-
-            return await _repository.Update(existingUser);
+            return await _repository.Update(Entity);
         }
     }
 }

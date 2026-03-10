@@ -21,22 +21,14 @@ namespace WMS.Application.Services
             _mapper = mapper;
         }
 
-  
-
        async public Task<bool> AddNew(Item Entity)
         {
-            if (Entity == null)
-                return false;
-            
-            var isAdded = await _repository.Add(Entity);
-
-            return isAdded;
+            return await _repository.Add(Entity);
         }
 
         public async Task<bool> Delete(int id)
         {
-            var isDeleted = await _repository.Delete(id);
-            return isDeleted;
+            return await _repository.Delete(id);
         }
 
         public async Task<IEnumerable<ItemDto>?> GetAll()
@@ -56,32 +48,9 @@ namespace WMS.Application.Services
                 ? _mapper.Map<ItemDto>(item)
                 : null;
         }
-
-      
-
-     async   public Task<bool> Update(Item Entity)
+        public async Task<bool> Update(Item Entity)
         {
-            if (Entity == null)
-                return false;
-
-            var existingItem = await _repository.GetByIdAsync(Entity.ItemID);
-
-            if (existingItem == null)
-                return false;
-
-            existingItem.ItemName = Entity.ItemName;
-            existingItem.Barcode = Entity.Barcode;
-            existingItem.ReorderPoint=Entity.ReorderPoint;
-            existingItem.AverageCost=Entity.AverageCost;
-            existingItem.IsActive=Entity.IsActive;
-            existingItem.IsExpiryRelated=Entity.IsExpiryRelated;
-            existingItem.CreatedBy=Entity.CreatedBy;
-            existingItem.CreatedAt=Entity.CreatedAt;
-
-
-            return await _repository.Update(existingItem);
-
-
+            return await _repository.Update(Entity);
         }
     }
 }
