@@ -24,17 +24,12 @@ namespace WMS.Application.Services
 
         public async Task<bool> AddNew(ItemUnit entity)
         {
-            if (entity == null)
-                return false;
-            var isAdded = await _repository.Add(entity);
-
-            return isAdded;
+            return await _repository.Add(entity);
         }
 
         public async Task<bool> Delete(int id)
         {
-            var isDeleted = await _repository.Delete(id);
-            return isDeleted;
+            return await _repository.Delete(id);
         }
 
         public async Task<IEnumerable<ItemUnitDto>?> GetAll()
@@ -57,20 +52,7 @@ namespace WMS.Application.Services
 
         async public Task<bool> Update(ItemUnit Entity)
         {
-            if (Entity == null)
-                return false;
-
-            var existingItemUnit= await _repository.GetByIdAsync(Entity.ItemUnitID);
-
-            if (existingItemUnit == null)
-                return false;
-
-            existingItemUnit.UnitID= Entity.UnitID;
-            existingItemUnit.ItemID= Entity.ItemID;
-            existingItemUnit.Factor= Entity.Factor;
-
-            return await _repository.Update(existingItemUnit);
-
+            return await _repository.Update(Entity);
         }
     }
 }

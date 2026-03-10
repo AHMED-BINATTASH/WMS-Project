@@ -24,22 +24,11 @@ namespace WMS.Application.Services
 
         public async Task<bool> AddNew(Category Entity)
         {
-            if (Entity == null)
-                return false;
-
-
-            var IsAdded = await _repository.Add(Entity);
-            return IsAdded;
-
-
+            return await _repository.Add(Entity); 
         }
-
-
         public async Task<bool> Delete(int id)
         {
-            var IsDeleted = await _repository.Delete(id);
-
-            return IsDeleted;
+            return await _repository.Delete(id);
         }
 
         public async Task<IEnumerable<CategoryDto>?> GetAll()
@@ -58,19 +47,7 @@ namespace WMS.Application.Services
 
         async public Task<bool> Update(Category Entity)
         {
-            if (Entity == null)
-                return false;
-
-            var existingCategory = await _repository.GetByIdAsync(Entity.CategoryID);
-
-            if (existingCategory == null)
-                return false;
-
-            existingCategory.CategoryName = Entity.CategoryName;
-            existingCategory.Description = Entity.Description;
-            existingCategory.ParentCategoryId = Entity.ParentCategoryId;
-
-            return await _repository.Update(existingCategory);
+            return await _repository.Update(Entity);
         }
     }
 }

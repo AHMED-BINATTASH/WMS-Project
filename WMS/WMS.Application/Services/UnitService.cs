@@ -25,19 +25,12 @@ namespace WMS.Application.Services
 
         async public Task<bool> AddNew(Unit Entity)
         {
-            if (Entity == null)
-                return false;
-
-            bool IsAdded = await _repository.Add(Entity);
-
-            return IsAdded;
-
+            return await _repository.Add(Entity);
         }
 
         public async Task<bool> Delete(int id)
         {
-            bool IsDeleted = await _repository.Delete(id);
-            return IsDeleted;
+            return await _repository.Delete(id);
         }
 
         public async Task<IEnumerable<UnitDto>?> GetAll()
@@ -52,18 +45,8 @@ namespace WMS.Application.Services
             return Unit!=null? _mapper.Map<UnitDto>(Unit) : null;
         }
 
-       async public Task<bool> Update(Unit Entity)
+        public async Task<bool> Update(Unit Entity)
         {
-            if (Entity == null)
-                return false;
-            var existingUint = await _repository.GetByIdAsync(Entity.UnitID);
-
-            if (existingUint == null)
-                return false;
-
-            existingUint.UnitName = Entity.UnitName;
-            existingUint.UnitSymbol = Entity.UnitSymbol;
-
             return await _repository.Update(Entity);
         }
     }

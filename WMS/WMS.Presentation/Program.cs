@@ -19,22 +19,23 @@ using WMS.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IRepository<User>,UserRepository>();
-builder.Services.AddScoped<IService<UserDto>,UserService>();
+// Registring User Service and Repository
+builder.Services.AddScoped<IUserService,UserService>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
 
 // Registring AppDbContext Option
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration["ConnectionString"],
     b => b.MigrationsAssembly("WMS.Infrastructure")));
 
+// Option Pattern
 var jwtOptions = builder.Configuration.GetSection("JWT").Get<JWTSettings>();
 
+// Registring Option Pattern's Object
 builder.Services.AddSingleton<JWTSettings>(jwtOptions);
 
 builder.Services.AddAuthentication()

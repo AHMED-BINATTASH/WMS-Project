@@ -31,44 +31,24 @@ namespace WMS.Application.Services
 
         async public Task<CountryDto?> GetByID(int id)
         {
+            Country country = await _repository.GetByIdAsync(id);
 
-            var Country = await _repository.GetByIdAsync(id);
-
-            return Country != null ? _mapper.Map<CountryDto>(Country) : null;
+            return country != null ? _mapper.Map<CountryDto>(country) : null;
         }
-
-
 
         async public Task<bool> Delete(int id)
         {
-            var IsDeleted = await _repository.Delete(id);
-            return IsDeleted;
-
+            return await _repository.Delete(id);
         }
 
         async public Task<bool> AddNew(Country Entity)
         {
-            if (Entity == null)
-                return false;
-
             return await _repository.Add(Entity); ;
         }
 
         async public Task<bool> Update(Country Entity)
         {
-
-            if (Entity == null)
-                return false;
-
-            var existingCountry = await _repository.GetByIdAsync(Entity.CountryID);
-
-            if (existingCountry == null)
-                return false;
-
-            existingCountry.CountryName = Entity.CountryName;
-           
-
-            return await _repository.Update(existingCountry);
+            return await _repository.Update(Entity);
         }
     }
 }
