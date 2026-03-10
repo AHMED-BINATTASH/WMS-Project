@@ -23,15 +23,15 @@ namespace WMS.Application.Services
 
         async public Task<IEnumerable<PersonDto>?> GetAll()
         {
-            var People = await _repository.GetAllAsync();
+            IEnumerable<Person> People = await _repository.GetAllAsync();
 
-            return People != null ? _mapper.Map<IEnumerable<PersonDto>>(People) : null;
+            return _mapper.Map<IEnumerable<PersonDto>>(People);
         }
         async public Task<PersonDto?> GetByID(int id)
         {
             var Person = await _repository.GetByIdAsync(id);
 
-            return Person != null ? _mapper.Map<PersonDto>(Person) : null;
+            return _mapper.Map<PersonDto>(Person);
         }
         async public Task<bool> AddNew(Person Entity)
         {

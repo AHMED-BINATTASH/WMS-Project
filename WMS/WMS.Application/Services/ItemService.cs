@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WMS.Application.DTOs;
@@ -10,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class ItemService : IService<ItemDto,Item>
+    public class ItemService : IService<ItemDto, Item>
     {
         private readonly IRepository<Item> _repository;
         private readonly IMapper _mapper;
@@ -21,7 +22,7 @@ namespace WMS.Application.Services
             _mapper = mapper;
         }
 
-       async public Task<bool> AddNew(Item Entity)
+        async public Task<bool> AddNew(Item Entity)
         {
             return await _repository.Add(Entity);
         }
@@ -33,20 +34,18 @@ namespace WMS.Application.Services
 
         public async Task<IEnumerable<ItemDto>?> GetAll()
         {
-            var items = await _repository.GetAllAsync();
+            IEnumerable<Item> items = await _repository.GetAllAsync();
 
-            return items != null
-                ? _mapper.Map<IEnumerable<ItemDto>>(items)
-                : null;
+            return _mapper.Map<IEnumerable<ItemDto>>(items);
+
         }
 
         public async Task<ItemDto?> GetByID(int id)
         {
-            var item = await _repository.GetByIdAsync(id);
+            Item item = await _repository.GetByIdAsync(id);
 
-            return item != null
-                ? _mapper.Map<ItemDto>(item)
-                : null;
+            return _mapper.Map<ItemDto>(item);
+
         }
         public async Task<bool> Update(Item Entity)
         {

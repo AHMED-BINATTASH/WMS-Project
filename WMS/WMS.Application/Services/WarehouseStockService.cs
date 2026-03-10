@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +12,19 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class WarehouseStockService : IService<WarehouseStockDto, Warehouse>
+    public class WarehouseStockService : IService<WarehouseStockDto, WarehouseStock>
     {
-        private readonly IRepository<Warehouse> _repository;
+        private readonly IRepository<WarehouseStock> _repository;
         private readonly IMapper _mapper;
 
-        public WarehouseStockService(IRepository<Warehouse> repository, IMapper mapper)
+        public WarehouseStockService(IRepository<WarehouseStock> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
 
-        public async Task<bool> AddNew(Warehouse Entity)
+        public async Task<bool> AddNew(WarehouseStock Entity)
         {
             return await _repository.Add(Entity);
         }
@@ -35,17 +36,17 @@ namespace WMS.Application.Services
 
         public async Task<IEnumerable<WarehouseStockDto>?> GetAll()
         {
-            var warehouseStocks = await _repository.GetAllAsync();
-            return warehouseStocks != null ? _mapper.Map<IEnumerable<WarehouseStockDto>>(warehouseStocks) : null;
+            IEnumerable<WarehouseStock> warehouseStocks = await _repository.GetAllAsync();
+            return _mapper.Map<IEnumerable<WarehouseStockDto>>(warehouseStocks);
         }
 
         public async Task<WarehouseStockDto?> GetByID(int id)
         {
             var warehouseStock = await _repository.GetByIdAsync(id);
-            return warehouseStock != null ? _mapper.Map<WarehouseStockDto>(warehouseStock) : null;
+            return _mapper.Map<WarehouseStockDto>(warehouseStock);
         }
 
-        public async Task<bool> Update(Warehouse Entity)
+        public async Task<bool> Update(WarehouseStock Entity)
         {
             return await _repository.Update(Entity);
         }

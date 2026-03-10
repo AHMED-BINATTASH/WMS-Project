@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,9 @@ namespace WMS.Application.Services
 
         async public Task<IEnumerable<CountryDto>?> GetAll()
         {
-            var countries = await _repository.GetAllAsync();
+            IEnumerable<Country> countries = await _repository.GetAllAsync();
 
-            return countries != null ? _mapper.Map<IEnumerable<CountryDto>>(countries) : null;
+            return _mapper.Map<IEnumerable<CountryDto>>(countries);
         }
 
         async public Task<CountryDto?> GetByID(int id)

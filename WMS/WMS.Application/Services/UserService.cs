@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,15 +24,15 @@ namespace WMS.Application.Services
 
         async public Task<IEnumerable<UserDto>?> GetAll()
         {
-            var People = await _repository.GetAllAsync();
+            IEnumerable<User> users= await _repository.GetAllAsync();
 
-            return People != null ? _mapper.Map<IEnumerable<UserDto>>(People) : null;
+            return _mapper.Map<IEnumerable<UserDto>>(users);
         }
         async public Task<UserDto?> GetByID(int id)
         {
-            var User = await _repository.GetByIdAsync(id);
+            User User = await _repository.GetByIdAsync(id);
 
-            return User != null ? _mapper.Map<UserDto>(User) : null;
+            return _mapper.Map<UserDto>(User);
         }
         public async Task<User> GetByUsername(string username)
         {

@@ -33,17 +33,17 @@ namespace WMS.Application.Services
 
         public async Task<IEnumerable<TransactionTypeDto>?> GetAll()
         {
-            var TransactionTypes = await _repository.GetAllAsync();
+            IEnumerable<TransactionType> TransactionTypes = await _repository.GetAllAsync();
 
-            return TransactionTypes != null ? _mapper.Map<IEnumerable<TransactionTypeDto>>(TransactionTypes) : null;
+            return _mapper.Map<IEnumerable<TransactionTypeDto>>(TransactionTypes)   ;
 
         }
 
         public async Task<TransactionTypeDto?> GetByID(int id)
         {
-            var TransactionType = await _repository.GetByIdAsync(id);
+            TransactionType TransactionType = await _repository.GetByIdAsync(id);
 
-            return TransactionType != null ? _mapper.Map<TransactionTypeDto>(TransactionType) : null;
+            return _mapper.Map<TransactionTypeDto>(TransactionType);
         }
 
         public Task<bool> Update(TransactionType Entity)

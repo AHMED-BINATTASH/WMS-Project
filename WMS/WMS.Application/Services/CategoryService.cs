@@ -33,14 +33,14 @@ namespace WMS.Application.Services
 
         public async Task<IEnumerable<CategoryDto>?> GetAll()
         {
-            var Cateories = await _repository.GetAllAsync();
+            IEnumerable<Category> Cateories = await _repository.GetAllAsync();
 
-            return Cateories != null ? _mapper.Map<IEnumerable<CategoryDto>>(Cateories) : null;
+            return _mapper.Map<IEnumerable<CategoryDto>>(Cateories);
         }
 
         public async Task<CategoryDto?> GetByID(int id)
         {
-            var Category = await _repository.GetByIdAsync(id);
+            Category Category = await _repository.GetByIdAsync(id);
             return Category != null ? _mapper.Map<CategoryDto>(Category) : null;
         }
 

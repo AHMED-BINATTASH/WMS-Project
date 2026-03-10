@@ -36,15 +36,15 @@ namespace WMS.Application.Services
 
         public async Task<IEnumerable<WarehouseDto>?> GetAll()
         {
-            var Warehouses = await _repository.GetAllAsync();
-            return Warehouses != null ? _mapper.Map<IEnumerable<WarehouseDto>>(Warehouses) : null;
+            IEnumerable<Warehouse> Warehouses = await _repository.GetAllAsync();
+            return _mapper.Map<IEnumerable<WarehouseDto>>(Warehouses);
 
         }
 
         public async Task<WarehouseDto?> GetByID(int id)
         {
-            var warehouse = await _repository.GetByIdAsync(id);
-            return warehouse != null ? _mapper.Map<WarehouseDto>(warehouse) : null;
+            Warehouse warehouse = await _repository.GetByIdAsync(id);
+            return _mapper.Map<WarehouseDto>(warehouse);
         }
 
         public async Task<bool> Update(Warehouse Entity)
