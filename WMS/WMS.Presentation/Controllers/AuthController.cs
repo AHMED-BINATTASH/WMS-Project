@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +24,7 @@ namespace WMS.Presentation.Controllers
         private readonly IUserService _UserService;
         private readonly IStringLocalizer<SharedResource> _localizer;
 
-    public AuthController(JWTSettings jWTSettings, IUserService userService, IStringLocalizer<SharedResource> localizer)
+        public AuthController(JWTSettings jWTSettings, IUserService userService, IStringLocalizer<SharedResource> localizer)
         {
             _tokenService = new TokenService(jWTSettings);
             _UserService = userService;
@@ -38,7 +38,7 @@ namespace WMS.Presentation.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
             if (request == null || string.IsNullOrEmpty(request.Username))
-                return BadRequest(new ApiResponse<object> 
+                return BadRequest(new ApiResponse<object>
                 {
                     Message = _localizer["InvalidRequest"].Value
                 });
@@ -59,7 +59,7 @@ namespace WMS.Presentation.Controllers
             string refreshToken = _tokenService.GenerateRefreshToken();
 
             User.RefreshTokenHash = BCrypt.Net.BCrypt.HashPassword(refreshToken);
-            User.RefreshTokenExpiredAt = DateTime.UtcNow.AddDays((request.RememberMe? 7 : 1));
+            User.RefreshTokenExpiredAt = DateTime.UtcNow.AddDays((request.RememberMe ? 7 : 1));
             User.RefreshTokenRevokedAt = null;
 
             if (await _UserService.Update(User))
@@ -93,7 +93,7 @@ namespace WMS.Presentation.Controllers
                 return BadRequest(ApiResponse<object>.FailureResponse(
                     message: _localizer["InvalidRefreshRequest"].Value,
                     code: ResultCode.InvalidRequest
-                    )); 
+                    ));
 
             if (User.RefreshTokenRevokedAt != null)
                 return Unauthorized(ApiResponse<object>.FailureResponse(
@@ -155,12 +155,12 @@ namespace WMS.Presentation.Controllers
 
             var User = await _UserService.GetByUsername(request.Username);
 
-            if(User == null)
+            if (User == null)
                 return NotFound(ApiResponse<object>.FailureResponse(
                     message: _localizer["UserNotFound"].Value,
                     code: ResultCode.InvalidRequest
                     ));
-            
+
             User.RefreshTokenRevokedAt = DateTime.UtcNow;
             await _UserService.Update(User);
 
@@ -190,5 +190,5 @@ namespace WMS.Presentation.Controllers
 
     }
 
-    
+
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,59 +24,31 @@ namespace WMS.Application.Services
 
         async public Task<IEnumerable<UserDto>?> GetAll()
         {
-            var People = await _repository.GetAllAsync();
+            IEnumerable<User> users= await _repository.GetAllAsync();
 
-            return People != null ? _mapper.Map<IEnumerable<UserDto>>(People) : null;
+            return _mapper.Map<IEnumerable<UserDto>>(users);
         }
-
         async public Task<UserDto?> GetByID(int id)
         {
+            User User = await _repository.GetByIdAsync(id);
 
-            var User = await _repository.GetByIdAsync(id);
-
-            return User != null ? _mapper.Map<UserDto>(User) : null;
+            return _mapper.Map<UserDto>(User);
         }
-
-    
-
-        async public Task<bool> AddNew(User Entity)
-        {
-            if (Entity == null)
-                return false;
-
-            var IsAdded = await _repository.Add(Entity);
-
-            return IsAdded;
-        }
-
-        async public Task<bool> Delete(int id)
-        {
-            var IsDeleted = await _repository.Delete(id);
-            return IsDeleted;
-
-        }
-
-        async public Task<bool> Update(User Entity)
-        {
-            if (Entity == null)
-                return false;
-
-            var existingUser = await _repository.GetByIdAsync(Entity.UserID);
-
-            if (existingUser == null)
-                return false;
-
-            existingUser.Username = Entity.Username;
-            existingUser.Password = Entity.Password;
-            existingUser.IsActive = Entity.IsActive;
-            existingUser.Role = Entity.Role;
-
-            return await _repository.Update(existingUser);
-        }
-
         public async Task<User> GetByUsername(string username)
         {
             return await _repository.GetByUsernameAsync(username);
+        }
+        async public Task<bool> AddNew(User Entity)
+        {
+            return await _repository.Add(Entity);
+        }
+        async public Task<bool> Delete(int id)
+        {
+            return await _repository.Delete(id);
+        }
+        async public Task<bool> Update(User Entity)
+        {
+            return await _repository.Update(Entity);
         }
     }
 }
