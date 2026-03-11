@@ -8,31 +8,70 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class CategoryRepository : IRepository<Category>
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    public class CategoryRepository : IRepository<Category>
     {
-        public Task<bool> Add(Category entity)
+        private readonly AppDbContext _dbContext;
+
+        public CategoryRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(Category entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                return false;
+
+            _dbContext.Categories.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            Category category = await _dbContext.Categories.FindAsync(id);
+
+            if (category == null)
+                return false;
+
+            _dbContext.Remove(category);
+
+            return await Save();
         }
 
-        public Task<Category> GetByIdAsync(int id)
+        public async Task<IEnumerable<Category>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Categories.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> Update(Category entity)
+        public async Task<Category> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Categories.FindAsync(id);
+        }
+
+        public async Task<bool> Update(Category entity)
+        {
+            if (entity == null)
+                return false;
+
+            Category category = await _dbContext.Categories.FindAsync(entity.CategoryID);
+
+            if (category == null)
+                return false;
+
+            _dbContext.Entry(category).CurrentValues.SetValues(entity);
+
+            category.ParentCategoryInfo = entity.ParentCategoryInfo;
+
+            return await Save();
+        }
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

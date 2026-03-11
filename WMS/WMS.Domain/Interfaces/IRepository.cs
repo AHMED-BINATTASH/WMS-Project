@@ -14,5 +14,6 @@ namespace WMS.Domain.Interfaces
         Task<bool> Add(T entity);
         Task<bool> Delete(int id);
         Task<bool> Update(T entity);
+        Task<bool> Save();
     }
 }

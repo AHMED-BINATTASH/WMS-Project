@@ -24,7 +24,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.People.Add(entity);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<bool> Delete(int id)
@@ -36,7 +36,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.People.Remove(entity);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<IEnumerable<Person>> GetAllAsync()
@@ -61,7 +61,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.Entry(person).CurrentValues.SetValues(entity);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<bool> IsExistByEmailIDAsync(string Email)
@@ -80,6 +80,10 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             return await _dbContext.People
                             .AnyAsync(c => c.NationalID == NationalID);
+        }
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

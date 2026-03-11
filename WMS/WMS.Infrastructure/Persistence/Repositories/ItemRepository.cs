@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,68 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class ItemRepository : IRepository<Item>
+    public class ItemRepository : IRepository<Item>
     {
-        public Task<bool> Add(Item entity)
+        private readonly AppDbContext _dbContext;
+
+        public ItemRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(Item entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                return false;
+
+            _dbContext.Items.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<Item>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            Item item = await _dbContext.Items.FindAsync(id);
+
+            if (item == null)
+                return false;
+
+            item.IsActive = false;
+
+            return await Save();
+        }
+        public async Task<IEnumerable<Item>> GetAllAsync()
+        {
+            return await _dbContext.Items.AsNoTracking().ToListAsync();
         }
 
-        public Task<Item> GetByIdAsync(int id)
+        public async Task<Item> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Items.FindAsync(id);
         }
 
-        public Task<bool> Update(Item entity)
+        public async Task<bool> Update(Item entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                return false;
+
+            Item item = await _dbContext.Items.FindAsync(entity.ItemID);
+
+            if (item == null)
+                return false;
+
+            _dbContext.Entry(item).CurrentValues.SetValues(entity);
+
+            item.CategoryInfo = entity.CategoryInfo;
+            item.UnitInfo = entity.UnitInfo;
+            item.CategoryInfo = entity.CategoryInfo;
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

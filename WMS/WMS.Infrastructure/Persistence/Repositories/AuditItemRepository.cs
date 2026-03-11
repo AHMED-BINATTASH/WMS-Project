@@ -9,7 +9,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class AuditItemRepository : IRepository<AuditItem>
+    public class AuditItemRepository : IRepository<AuditItem>
     {
         private readonly AppDbContext _dbContext;
 
@@ -25,7 +25,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.AuditItems.Add(entity);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<bool> Delete(int id)
@@ -37,7 +37,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.AuditItems.Remove(auditItem);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<IEnumerable<AuditItem>> GetAllAsync()
@@ -57,7 +57,6 @@ namespace WMS.Infrastructure.Persistence.Repositories
                 return null;
 
             return auditItem;
-
         }
 
         public async Task<bool> Update(AuditItem entity)
@@ -72,6 +71,10 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.Entry(auditItem).CurrentValues.SetValues(entity);
 
+            return await Save();
+        }
+        public async Task<bool> Save()
+        {
             return await _dbContext.SaveChangesAsync() > 0;
         }
     }

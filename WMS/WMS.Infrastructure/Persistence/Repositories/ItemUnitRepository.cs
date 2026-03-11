@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,64 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class ItemUnitRepository : IRepository<ItemUnit>
+    public class ItemUnitRepository : IRepository<ItemUnit>
     {
-        public Task<bool> Add(ItemUnit entity)
+        private readonly AppDbContext _dbContext;
+
+        public ItemUnitRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(ItemUnit entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) return false;
+
+            _dbContext.ItemUnits.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<ItemUnit>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            ItemUnit itemUnit = await _dbContext.ItemUnits.FindAsync(id);
+
+            if (itemUnit == null) return false;
+
+            _dbContext.Remove(itemUnit);
+
+            return await Save();
         }
 
-        public Task<ItemUnit> GetByIdAsync(int id)
+        public async Task<IEnumerable<ItemUnit>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.ItemUnits.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> Update(ItemUnit entity)
+        public async Task<ItemUnit> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ItemUnits.FindAsync(id);
+        }
+
+        public async Task<bool> Update(ItemUnit entity)
+        {
+            if (entity == null) return false;
+
+            ItemUnit itemUnit = await _dbContext.ItemUnits.FindAsync(entity.ItemUnitID);
+
+            if (itemUnit == null) return false;
+
+            _dbContext.Entry(itemUnit).CurrentValues.SetValues(entity);
+
+            itemUnit.ItemInfo = entity.ItemInfo;
+            itemUnit.UnitInfo = entity.UnitInfo;
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

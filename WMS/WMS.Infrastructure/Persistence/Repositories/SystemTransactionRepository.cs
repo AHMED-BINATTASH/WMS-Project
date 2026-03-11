@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,66 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class SystemTransactionRepository : IRepository<SystemTransaction>
+    public class SystemTransactionRepository : IRepository<SystemTransaction>
     {
-        public Task<bool> Add(SystemTransaction entity)
+        private readonly AppDbContext _dbContext;
+
+        public SystemTransactionRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(SystemTransaction entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) return false;
+
+            _dbContext.SystemTransactions.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<SystemTransaction>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            SystemTransaction transaction = await _dbContext.SystemTransactions.FindAsync(id);
+
+            if (transaction == null) return false;
+            
+            _dbContext.Remove(transaction);
+
+            return await Save();
         }
 
-        public Task<SystemTransaction> GetByIdAsync(int id)
+        public async Task<IEnumerable<SystemTransaction>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.SystemTransactions.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> Update(SystemTransaction entity)
+        public async Task<SystemTransaction> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.SystemTransactions.FindAsync(id);
+        }
+
+        public async Task<bool> Update(SystemTransaction entity)
+        {
+            if (entity == null) return false;
+
+            SystemTransaction transaction = await _dbContext.SystemTransactions.FindAsync(entity.TransactionID);
+
+            if (transaction == null) return false;
+
+            _dbContext.Entry(transaction).CurrentValues.SetValues(entity);
+
+            transaction.WarehouseInfo = entity.WarehouseInfo;
+            transaction.ItemInfo = entity.ItemInfo;
+            transaction.TransactionTypeInfo = entity.TransactionTypeInfo;
+            transaction.CreatorInfo = entity.CreatorInfo;
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

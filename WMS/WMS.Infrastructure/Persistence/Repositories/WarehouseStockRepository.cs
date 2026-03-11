@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,63 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class WarehouseStockRepository : IRepository<WarehouseStock>
+    public class WarehouseStockRepository : IRepository<WarehouseStock>
     {
-        public Task<bool> Add(WarehouseStock entity)
+        private readonly AppDbContext _dbContext;
+
+        public WarehouseStockRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(WarehouseStock entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) return false;
+
+            _dbContext.WarehouseStocks.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<WarehouseStock>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            WarehouseStock stock = await _dbContext.WarehouseStocks.FindAsync(id);
+
+            if (stock == null) return false;
+
+            stock.IsActive = false;
+
+            return await Save();
         }
 
-        public Task<WarehouseStock> GetByIdAsync(int id)
+        public async Task<IEnumerable<WarehouseStock>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.WarehouseStocks.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> Update(WarehouseStock entity)
+        public async Task<WarehouseStock> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.WarehouseStocks.FindAsync(id);
+        }
+
+        public async Task<bool> Update(WarehouseStock entity)
+        {
+            if (entity == null) return false;
+            WarehouseStock stock = await _dbContext.WarehouseStocks.FindAsync(entity.WarehouseStockID);
+            if (stock == null) return false;
+
+            _dbContext.Entry(stock).CurrentValues.SetValues(entity);
+
+            stock.WarehouseInfo = entity.WarehouseInfo;
+            stock.ItemInfo = entity.ItemInfo;
+            stock.CreatorInfo = entity.CreatorInfo;
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

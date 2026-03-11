@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,61 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class UnitRepository : IRepository<Unit>
+    public class UnitRepository : IRepository<Unit>
     {
-        public Task<bool> Add(Unit entity)
+        private readonly AppDbContext _dbContext;
+
+        public UnitRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(Unit entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) return false;
+
+            _dbContext.Units.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<Unit>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            Unit unit = await _dbContext.Units.FindAsync(id);
+
+            if (unit == null) return false;
+
+            _dbContext.Remove(unit);
+
+            return await Save();
         }
 
-        public Task<Unit> GetByIdAsync(int id)
+        public async Task<IEnumerable<Unit>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Units.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> Update(Unit entity)
+        public async Task<Unit> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Units.FindAsync(id);
+        }
+
+        public async Task<bool> Update(Unit entity)
+        {
+            if (entity == null) return false;
+
+            Unit unit = await _dbContext.Units.FindAsync(entity.UnitID);
+
+            if (unit == null) return false;
+
+            _dbContext.Entry(unit).CurrentValues.SetValues(entity);
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.Users.Add(entity);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<bool> Delete(int id)
@@ -33,9 +33,9 @@ namespace WMS.Infrastructure.Persistence.Repositories
             if (user == null) 
                 return false;
 
-            _dbContext.Remove(user);
+            user.IsActive = false;
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<IEnumerable<User>> GetAllAsync()
@@ -62,11 +62,15 @@ namespace WMS.Infrastructure.Persistence.Repositories
             
             user.PersonInfo = entity.PersonInfo;
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
         public async Task<User> GetByUsernameAsync(string username)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == username);
+        }
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

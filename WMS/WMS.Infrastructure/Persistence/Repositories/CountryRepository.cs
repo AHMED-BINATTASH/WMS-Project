@@ -25,7 +25,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.Countries.Add(entity);
 
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<bool> Delete(int id)
@@ -36,7 +36,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
                 return false;
 
             _dbContext.Countries.Remove(entity);
-            return await _dbContext.SaveChangesAsync() > 0;
+            return await Save();
         }
 
         public async Task<IEnumerable<Country>> GetAllAsync()
@@ -67,6 +67,10 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
             _dbContext.Entry(country).CurrentValues.SetValues(entity);
 
+            return await Save();
+        }
+        public async Task<bool> Save()
+        {
             return await _dbContext.SaveChangesAsync() > 0;
         }
     }

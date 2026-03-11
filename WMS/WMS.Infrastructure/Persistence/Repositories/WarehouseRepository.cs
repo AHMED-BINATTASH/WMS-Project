@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,31 +9,61 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    internal class WarehouseRepository : IRepository<Warehouse>
+    public class WarehouseRepository : IRepository<Warehouse>
     {
-        public Task<bool> Add(Warehouse entity)
+        private readonly AppDbContext _dbContext;
+
+        public WarehouseRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Add(Warehouse entity)
         {
-            throw new NotImplementedException();
+            if (entity == null) return false;
+
+            _dbContext.Warehouses.Add(entity);
+
+            return await Save();
         }
 
-        public Task<IEnumerable<Warehouse>> GetAllAsync()
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            Warehouse warehouse = await _dbContext.Warehouses.FindAsync(id);
+
+            if (warehouse == null) return false;
+
+            warehouse.IsActive = false;
+
+            return await Save();
         }
 
-        public Task<Warehouse> GetByIdAsync(int id)
+        public async Task<IEnumerable<Warehouse>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Warehouses.AsNoTracking().ToListAsync();
         }
 
-        public Task<bool> Update(Warehouse entity)
+        public async Task<Warehouse> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Warehouses.FindAsync(id);
+        }
+
+        public async Task<bool> Update(Warehouse entity)
+        {
+            if (entity == null) return false;
+
+            Warehouse warehouse = await _dbContext.Warehouses.FindAsync(entity.WarehouseID);
+
+            if (warehouse == null) return false;
+
+            _dbContext.Entry(warehouse).CurrentValues.SetValues(entity);
+
+            return await Save();
+        }
+
+        public async Task<bool> Save()
+        {
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }

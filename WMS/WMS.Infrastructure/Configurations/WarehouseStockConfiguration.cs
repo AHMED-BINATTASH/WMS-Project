@@ -35,6 +35,10 @@ namespace WMS.Infrastructure.Configurations
                    .HasColumnType("DATETIME")
                    .HasDefaultValueSql("GETDATE()");
 
+            builder.Property(ws => ws.IsActive)
+                .HasColumnType("BIT")
+                .HasDefaultValue(true);
+
             builder.HasOne(ws => ws.WarehouseInfo)
                    .WithMany()
                    .HasForeignKey(ws => ws.WarehouseID)
