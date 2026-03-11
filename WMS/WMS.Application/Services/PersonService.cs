@@ -11,11 +11,11 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class PersonService : IService<PersonDto, Person>
+    public class PersonService : IPersonService
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
         private readonly IMapper _mapper;
-        public PersonService(IRepository<Person> repository, IMapper mapper)
+        public PersonService(IPersonRepository repository, IMapper mapper)
         {
             _mapper = mapper;
             _repository = repository;
@@ -44,6 +44,16 @@ namespace WMS.Application.Services
         public async Task<bool> Update(Person Entity)
         {
             return await _repository.Update(Entity);
+        }
+
+        public async Task<bool> IsExistByNationalID(string NationalID)
+        {
+            return await _repository.IsExistByNationalIDAsync(NationalID);
+        }
+
+        public async Task<bool> IsExistByEmail(string Email)
+        {
+            return await _repository.IsExistByEmailIDAsync(Email);
         }
     }
 }
