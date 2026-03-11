@@ -41,7 +41,6 @@ namespace WMS.Application.Services
         {
             return await _repository.Delete(id);
         }
-
         public async Task<bool> Update(Person Entity)
         {
             return await _repository.Update(Entity);
@@ -55,7 +54,6 @@ namespace WMS.Application.Services
         public async Task<bool> IsExistByEmail(string Email)
         {
             return await _repository.IsExistByEmailIDAsync(Email);
-
         }
     }
 }

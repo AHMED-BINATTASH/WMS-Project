@@ -22,7 +22,6 @@ namespace WMS.Application.Services
             _repository = repository;
         }
 
-
         async public Task<IEnumerable<CountryDto>?> GetAll()
         {
             IEnumerable<Country> countries = await _repository.GetAllAsync();
