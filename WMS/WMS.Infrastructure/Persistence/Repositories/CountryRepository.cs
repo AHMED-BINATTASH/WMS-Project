@@ -9,7 +9,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    public class CountryRepository : IRepository<Country>
+    public class CountryRepository : ICountryRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -47,6 +47,12 @@ namespace WMS.Infrastructure.Persistence.Repositories
         public async Task<Country> GetByIdAsync(int id)
         {
             return await _dbContext.Countries.FindAsync(id);
+        }
+
+        public async Task<bool> IsExistByCountryNameAsync(string countryName)
+        {
+            return await _dbContext.Countries
+                .AnyAsync(c => c.CountryName == countryName);
         }
 
         public async Task<bool> Update(Country entity)

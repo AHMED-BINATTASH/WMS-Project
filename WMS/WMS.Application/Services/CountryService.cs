@@ -11,11 +11,11 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class CountryService : IService<CountryDto, Country>
+    public class CountryService : ICountryService
     {
-        private readonly IRepository<Country> _repository;
+        private readonly ICountryRepository _repository;
         private readonly IMapper _mapper;
-        public CountryService(IRepository<Country> repository, IMapper mapper)
+        public CountryService(ICountryRepository repository, IMapper mapper)
         {
             _mapper = mapper;
             _repository = repository;
@@ -36,8 +36,6 @@ namespace WMS.Application.Services
 
             return Country != null ? _mapper.Map<CountryDto>(Country) : null;
         }
-
-
 
         async public Task<bool> Delete(int id)
         {
@@ -69,6 +67,10 @@ namespace WMS.Application.Services
            
 
             return await _repository.Update(existingCountry);
+        }
+        public Task<bool> IsExistByCountryName(string CountryName)
+        {
+            return _repository.IsExistByCountryNameAsync(CountryName);
         }
     }
 }

@@ -11,7 +11,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class UserService : IService<UserDto, User>
+    public class UserService : IUserService
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -71,6 +71,11 @@ namespace WMS.Application.Services
             existingUser.Role = Entity.Role;
 
             return await _repository.Update(existingUser);
+        }
+
+        public async Task<User> GetByUsername(string username)
+        {
+            return await _repository.GetByUsernameAsync(username);
         }
     }
 }

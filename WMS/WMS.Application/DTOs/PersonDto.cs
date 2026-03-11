@@ -14,9 +14,7 @@ namespace WMS.Application.DTOs
      string Address,
      string Phone,
      string Email,
-     int CountryID,
-     CountryDto CountryInfo
- )
+     int CountryID)
     {
         public string FullName => $"{FirstName} {LastName}";
     }

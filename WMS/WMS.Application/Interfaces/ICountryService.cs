@@ -8,10 +8,8 @@ using WMS.Domain.Entities;
 
 namespace WMS.Application.Interfaces
 {
-    public interface IUserService : IService<UserDto,User>
+    public interface ICountryService : IService<CountryDto,Country>
     {
-        Task<User> GetByUsername(string username);
-        //Task<bool> IsExistByUsername(string username);
-
+        Task<bool> IsExistByCountryName(string CountryName);
     }
 }

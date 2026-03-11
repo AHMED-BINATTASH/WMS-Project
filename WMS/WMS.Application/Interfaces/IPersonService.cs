@@ -8,10 +8,9 @@ using WMS.Domain.Entities;
 
 namespace WMS.Application.Interfaces
 {
-    public interface IUserService : IService<UserDto,User>
+    public interface IPersonService : IService<PersonDto,Person>
     {
-        Task<User> GetByUsername(string username);
-        //Task<bool> IsExistByUsername(string username);
-
+        Task<bool> IsExistByNationalID(string PersonName);
+        Task<bool> IsExistByEmail(string PersonName);
     }
 }

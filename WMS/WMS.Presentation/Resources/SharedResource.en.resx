@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+<data name="InvalidRequest" xml:space="preserve">
+    <value>Invalid request data.</value>
+  </data>
+  <data name="InvalidUserLoginRequest" xml:space="preserve">
+    <value>Invalid username or password.</value>
+  </data>
+  <data name="InvalidUserLoginAllowed" xml:space="preserve">
+    <value>Your account is inactive. Please contact the administrator.</value>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Logged in successfully.</value>
+  </data>
+  <data name="RefredhTokenAllreadyWork" xml:space="preserve">
+    <value>Refresh token is invalid or expired.</value>
+  </data>
+  <data name="UpdateRefreshToken" xml:space="preserve">
+    <value>Token refreshed successfully.</value>
+  </data>
+  <data name="LogoutSuccess" xml:space="preserve">
+    <value>Logged out successfully.</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>An error occurred while processing your request on the server.</value>
+  </data>
+<data name="NoCategoriesFound" xml:space="preserve"><value>No categories found at the moment.</value></data>
+  <data name="CategoryNotFound" xml:space="preserve"><value>The requested category was not found.</value></data>
+  <data name="CategoryCreated" xml:space="preserve"><value>Category created successfully.</value></data>
+  <data name="CategoryUpdated" xml:space="preserve"><value>Category updated successfully.</value></data>
+  <data name="CategoryDeleted" xml:space="preserve"><value>Category deleted successfully.</value></data>
+
+<data name="NoCountriesFound" xml:space="preserve"><value>No countries are currently available.</value></data>
+  <data name="CountryNotFound" xml:space="preserve"><value>The requested country was not found.</value></data>
+  <data name="CountryCreated" xml:space="preserve"><value>Country has been created successfully.</value></data>
+  <data name="CountryUpdated" xml:space="preserve"><value>Country details have been updated successfully.</value></data>
+  <data name="CountryDeleted" xml:space="preserve"><value>Country has been deleted successfully.</value></data>
+
+  <data name="NoItemsFound" xml:space="preserve"><value>No items are currently available.</value></data>
+  <data name="ItemNotFound" xml:space="preserve"><value>The requested item was not found.</value></data>
+  <data name="ItemCreated" xml:space="preserve"><value>Item has been created successfully.</value></data>
+  <data name="ItemUpdated" xml:space="preserve"><value>Item details have been updated successfully.</value></data>
+  <data name="ItemDeleted" xml:space="preserve"><value>Item has been deleted successfully.</value></data>
+
+  <data name="NoItemUnitsFound" xml:space="preserve"><value>No item units are currently available.</value></data>
+  <data name="UnitNotFound" xml:space="preserve"><value>The requested unit was not found.</value></data>
+  <data name="UnitCreated" xml:space="preserve"><value>Unit has been created successfully.</value></data>
+  <data name="UnitUpdated" xml:space="preserve"><value>Unit details have been updated successfully.</value></data>
+  <data name="UnitDeleted" xml:space="preserve"><value>Unit has been deleted successfully.</value></data>
+
+  <data name="NoPeopleFound" xml:space="preserve"><value>No people are currently available.</value></data>
+  <data name="PersonNotFound" xml:space="preserve"><value>The requested person was not found.</value></data>
+  <data name="PersonCreated" xml:space="preserve"><value>Person has been added successfully.</value></data>
+  <data name="PersonUpdated" xml:space="preserve"><value>Person details have been updated successfully.</value></data>
+  <data name="PersonDeleted" xml:space="preserve"><value>Person has been deleted successfully.</value></data>
+
+  <data name="NoUsersFound" xml:space="preserve"><value>No Users are currently available.</value></data>
+  <data name="UserNotFound" xml:space="preserve"><value>The requested User was not found.</value></data>
+  <data name="UserCreated" xml:space="preserve"><value>User has been added successfully.</value></data>
+  <data name="UserUpdated" xml:space="preserve"><value>User details have been updated successfully.</value></data>
+  <data name="UserDeleted" xml:space="preserve"><value>User has been deleted successfully.</value></data>
+
+</root>

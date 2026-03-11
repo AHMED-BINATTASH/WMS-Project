@@ -10,7 +10,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    public class PersonRepository : IRepository<Person>
+    public class PersonRepository : IPersonRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -62,6 +62,24 @@ namespace WMS.Infrastructure.Persistence.Repositories
             _dbContext.Entry(person).CurrentValues.SetValues(entity);
 
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsExistByEmailIDAsync(string Email)
+        {
+            if (!string.IsNullOrEmpty(Email))
+                return false;
+
+            return await _dbContext.People
+                            .AnyAsync(c => c.Email == Email);
+        }
+
+        public async Task<bool> IsExistByNationalIDAsync(string NationalID)
+        {
+            if (!string.IsNullOrEmpty(NationalID))
+                return false;
+
+            return await _dbContext.People
+                            .AnyAsync(c => c.NationalID == NationalID);
         }
     }
 }
