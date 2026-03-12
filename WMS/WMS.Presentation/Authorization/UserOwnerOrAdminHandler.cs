@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-public class PersonOwnerOrAdminHandler
-    : AuthorizationHandler<PersonOwnerOrAdminRequirement, int>
+public class UserOwnerOrAdminHandler
+    : AuthorizationHandler<UserOwnerOrAdminRequirement, int>
 {
     protected override Task HandleRequirementAsync(
         AuthorizationHandlerContext context,
-        PersonOwnerOrAdminRequirement requirement,
-        int PersonID)
+        UserOwnerOrAdminRequirement requirement,
+        int UserID)
     {
         if (context.User.IsInRole("Admin"))
         {
@@ -17,8 +17,8 @@ public class PersonOwnerOrAdminHandler
 
         var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (int.TryParse(userId, out int authenticatedPersonId) &&
-            authenticatedPersonId == PersonID)
+        if (int.TryParse(userId, out int authenticatedUserId) &&
+            authenticatedUserId == UserID)
         {
             context.Succeed(requirement);
         }

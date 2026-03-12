@@ -10,5 +10,6 @@ namespace WMS.Domain.Interfaces
     public interface ICountryRepository : IRepository<Country>
     {
         public Task<bool> IsExistByCountryNameAsync(string username);
+        public Task<bool> IsExistByCountryIDAsync(int countryID);
     }
 }

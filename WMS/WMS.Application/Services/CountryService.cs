@@ -50,9 +50,14 @@ namespace WMS.Application.Services
         {
             return await _repository.Update(Entity);
         }
-        public Task<bool> IsExistByCountryName(string CountryName)
+        public async Task<bool> IsExistByCountryName(string CountryName)
         {
-            return _repository.IsExistByCountryNameAsync(CountryName);
+            return await _repository.IsExistByCountryNameAsync(CountryName);
+        }
+
+        public async Task<bool> IsExistByCountryID(int CountryID)
+        {
+            return await _repository.IsExistByCountryIDAsync(CountryID);
         }
     }
 }

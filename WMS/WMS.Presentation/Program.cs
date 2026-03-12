@@ -17,6 +17,7 @@ using WMS.Application.DTOs;
 using WMS.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.WebHost.UseUrls("http://localhost:8080");
 
 // ==========================================
 // 1) Configuration & Database
@@ -39,11 +40,11 @@ builder.Services.AddSingleton<JWTSettings>(jwtOptions);
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -74,6 +75,14 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSingleton<IAuthorizationHandler, PersonOwnerOrAdminHandler>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("UserOwnerOrAdmin", policy =>
+        policy.Requirements.Add(new PersonOwnerOrAdminRequirement()));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, UserOwnerOrAdminHandler>();
+
 // ==========================================
 // 4) Rate Limiting (Õ„«Ì… «·„”«—« )
 // ==========================================
@@ -92,6 +101,16 @@ builder.Services.AddRateLimiter(options =>
                 Window = TimeSpan.FromMinutes(1),
                 QueueLimit = 0
             });
+    });
+});
+
+// ›Ì Program.cs (Backend)
+builder.Services.AddCors(options => {
+    options.AddPolicy("MyPolicy", builder => {
+        builder.WithOrigins("http://localhost:8080") //  ÕœÌÀ Â‰«
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowCredentials(); // ÷—Ê—Ì Ãœ« ··ﬂÊﬂÌ“
     });
 });
 
@@ -131,6 +150,7 @@ var app = builder.Build();
 // ==========================================
 // 6) Middleware Pipeline
 // ==========================================
+app.UseCors("MyPolicy");
 
 if (app.Environment.IsDevelopment())
 {

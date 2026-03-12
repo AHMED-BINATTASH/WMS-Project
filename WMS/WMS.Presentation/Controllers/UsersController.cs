@@ -6,137 +6,160 @@ using Microsoft.Extensions.Localization;
 using WMS.Application.DTOs;
 using WMS.Application.Interfaces;
 using WMS.Application.Services;
+using WMS.Application.Utilities;
 using WMS.Domain.Entities;
 using WMS.Presentation.Utilities;
 
 namespace WMS.Presentation.Controllers
 {
-    [Route("api/User")]
+    [Route("api/Users")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly JWTSettings _jWTSettings;
-        private readonly IService<UserDto, User> _UserService;
+        private readonly IUserService _UserService;
+        private readonly IPersonService _PersonService;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
 
-        public UserController(JWTSettings jWTSettings, IService<UserDto,User> UserService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
+        public UserController(IUserService userService, IPersonService personService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
         {
-            _jWTSettings = jWTSettings;
-            _UserService = UserService;
+            _UserService = userService;
+            _PersonService = personService;
             _localizer = localizer;
             _mapper = mapper;
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAll()
         {
-            IEnumerable<UserDto> Users = await _UserService.GetAll();
+            IEnumerable<UserDto> users = await _UserService.GetAll();
 
-            if (Users.Count() == 0)
+            var Users = _mapper.Map<IEnumerable<UserSlimDto>>(users);
+            if (!Users.Any())
             {
-                return NotFound(ApiResponse<object>.FailureResponse(message: _localizer["NoUsersFound"]));
+                return NotFound(ApiResponse<object>.FailureResponse(message: _localizer["No_Users_Found"]));
             }
 
-            return Ok(ApiResponse<IEnumerable<UserDto>>.SuccessResponse(
-                data: Users
-                ));
+            return Ok(ApiResponse<IEnumerable<UserSlimDto>>.SuccessResponse(
+                data: Users,
+                code: ResultCode.Success,
+                message: _localizer["Users_Found"]
+            ));
         }
 
         [Authorize]
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById(int id)
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> GetById(int id, [FromServices] IAuthorizationService authorizationService)
         {
-            var User = await _UserService.GetByID(id);
+            if (id < 1)
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Invalid_ID"],
+                    code: ResultCode.InvalidRequest));
 
-            if (User == null)
+            var UserDto = await _UserService.GetByID(id);
+
+            if (UserDto == null)
             {
-                return NotFound(ApiResponse<object>.FailureResponse(
-                    message: _localizer["UserNotFound"],
+                return NotFound(ApiResponse<UserSlimDto>.FailureResponse(
+                    message: _localizer["User_Not_Found"],
                     code: ResultCode.NotFound));
             }
 
-            return Ok(ApiResponse<UserDto>.SuccessResponse(data: User));
+            var User = _mapper.Map<UserSlimDto>(UserDto);
+            var authResult = await authorizationService.AuthorizeAsync(base.User, User.UserID, "UserOwnerOrAdmin");
+
+            if (!authResult.Succeeded)
+                return Forbid();
+
+            return Ok(ApiResponse<UserSlimDto>.SuccessResponse(
+                data: User,
+                message: _localizer["User_Found"],
+                code: ResultCode.Success
+            ));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost("Add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Add([FromBody] UserDto UserDto)
+        public async Task<IActionResult> Add([FromBody] UserAddDto UserToAddDto)
         {
-            if (UserDto == null)
-            {
-                return BadRequest(ApiResponse<object>.FailureResponse(
-                    message: _localizer["InvalidRequest"],
-                    code: ResultCode.InvalidRequest));
-            }
+            if (string.IsNullOrWhiteSpace(UserToAddDto.Username) || string.IsNullOrWhiteSpace(UserToAddDto.Password))
+                return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Username_Password_Required"]));
 
-            User User = _mapper.Map<User>(UserDto);
-            // Assuming your service returns the created object or its ID
-            var IsAdded = await _UserService.AddNew(User);
+            bool isPersonExist = await _PersonService.IsExistByPersonID(UserToAddDto.PersonID);
+            if (!isPersonExist)
+                return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Person_Not_Found"]));
 
-            if (IsAdded)
+            bool isUsernameTaken = await _UserService.IsUsernameExist(UserToAddDto.Username);
+            if (isUsernameTaken)
+                return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Username_Already_Taken"]));
+
+            User userEntity = _mapper.Map<User>(UserToAddDto);
+
+            userEntity.Username = userEntity.Username.Trim();
+            userEntity.Password = BCrypt.Net.BCrypt.HashPassword(UserToAddDto.Password);
+
+            var isAdded = await _UserService.AddNew(userEntity);
+
+            if (isAdded)
             {
+                var createdUser = _mapper.Map<UserSlimDto>(userEntity);
                 return CreatedAtAction(
                     nameof(GetById),
-                    new { id = UserDto.UserID },
-                    ApiResponse<object>.SuccessResponse(
-                        message: _localizer["UserCreated"],
+                    new { id = userEntity.UserID },
+                    ApiResponse<UserSlimDto>.SuccessResponse(
+                        data: createdUser,
+                        message: _localizer["User_Created"],
                         code: ResultCode.Success)
                 );
             }
 
-            return StatusCode(500, ApiResponse<object>.FailureResponse(
-                message: _localizer["ServerError"]));
+            return StatusCode(500, ApiResponse<object>.FailureResponse(message: _localizer["Server_Error"]));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update([FromBody] UserDto UserDto)
+        public async Task<IActionResult> Update([FromBody] UserSlimDto requestUserCrudDto)
         {
-            if (UserDto == null)
-            {
-                return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["InvalidRequest"]));
-            }
+            if (requestUserCrudDto == null || requestUserCrudDto.UserID <= 0)
+                return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Invalid_Request"]));
 
-            User User = _mapper.Map<User>(UserDto);
+            var currentUser = await _UserService.GetByID(requestUserCrudDto.UserID);
+            if (currentUser == null)
+                return NotFound(ApiResponse<object>.FailureResponse(message: _localizer["User_Not_Found"]));
 
-            var result = await _UserService.Update(User);
+            User userToUpdate = _mapper.Map<User>(requestUserCrudDto);
+
+            var result = await _UserService.Update(userToUpdate);
+
             if (result)
             {
                 return Ok(ApiResponse<object>.SuccessResponse(
-                    message: _localizer["UserUpdated"],
+                    message: _localizer["User_Updated"],
                     code: ResultCode.Success));
             }
 
-            return NotFound(ApiResponse<object>.FailureResponse(message: _localizer["UserNotFound"]));
+            return StatusCode(500, ApiResponse<object>.FailureResponse(message: _localizer["Server_Error"]));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _UserService.Delete(id);
             if (result)
             {
-                return Ok(ApiResponse<object>.SuccessResponse(
-                    message: _localizer["UserDeleted"],
-                    code: ResultCode.Success));
+                return Ok(ApiResponse<object>.SuccessResponse(message: _localizer["User_Deleted"]));
             }
 
-            return NotFound(ApiResponse<object>.FailureResponse(
-                message: _localizer["UserNotFound"],
-                code: ResultCode.NotFound));
+            return NotFound(ApiResponse<object>.FailureResponse(message: _localizer["User_Not_Found"]));
         }
     }
 }

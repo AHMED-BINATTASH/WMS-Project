@@ -50,5 +50,11 @@ namespace WMS.Application.Services
         {
             return await _repository.Update(Entity);
         }
+
+        public async Task<bool> IsUsernameExist(string username)
+        {
+            return await _repository.IsUsernameExistAsync(username);
+        }
+
     }
 }

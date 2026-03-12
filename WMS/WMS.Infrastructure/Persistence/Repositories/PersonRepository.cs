@@ -85,5 +85,14 @@ namespace WMS.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> IsExistByPersonIDAsync(int PersonID)
+        {
+            if (PersonID <= 0)
+                return false;
+
+            return await _dbContext.People
+                            .AnyAsync(c => c.PersonID == PersonID);
+        }
     }
 }

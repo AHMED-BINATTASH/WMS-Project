@@ -18,13 +18,15 @@ namespace WMS.Presentation.Controllers
     {
         private readonly JWTSettings _jWTSettings;
         private readonly IPersonService _PersonService;
+        private readonly ICountryService _CountryService;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
 
-        public PersonController(JWTSettings jWTSettings, IPersonService PersonService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
+        public PersonController(JWTSettings jWTSettings, IPersonService PersonService, ICountryService countryService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
         {
             _jWTSettings = jWTSettings;
             _PersonService = PersonService;
+            _CountryService = countryService;
             _localizer = localizer;
             _mapper = mapper;
         }
@@ -70,7 +72,7 @@ namespace WMS.Presentation.Controllers
                     code: ResultCode.NotFound));
             }
 
-            var authResult = await authorizationService.AuthorizeAsync(User, person, "PersonOwnerOrAdmin");
+            var authResult = await authorizationService.AuthorizeAsync(User, person.PersonID, "PersonOwnerOrAdmin");
 
             if (!authResult.Succeeded)
                 return Forbid();
@@ -104,6 +106,14 @@ namespace WMS.Presentation.Controllers
                 return BadRequest(ApiResponse<object>.FailureResponse(
                    message: _localizer["Person_Already_Exist"],
                    code: ResultCode.AlreadyExists
+                   ));
+
+            bool IsCountryExist = await _CountryService.IsExistByCountryID(PersonDto.CountryID);
+
+            if(!IsCountryExist)
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                   message: _localizer["CountryID_Not_Found"],
+                   code: ResultCode.InvalidRequest
                    ));
 
             var IsAdded = await _PersonService.AddNew(Person);
