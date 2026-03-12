@@ -20,13 +20,16 @@ namespace WMS.Presentation.Controllers
         private readonly IPersonService _PersonService;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
+        private readonly IService<SystemTransactionDto, SystemTransaction> _systemTransaction;
 
-        public PersonController(JWTSettings jWTSettings, IPersonService PersonService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
+        public PersonController(JWTSettings jWTSettings, IPersonService PersonService, IStringLocalizer<SharedResource> localizer,
+            IMapper mapper,IService<SystemTransactionDto, SystemTransaction> systemTransaction)
         {
             _jWTSettings = jWTSettings;
             _PersonService = PersonService;
             _localizer = localizer;
             _mapper = mapper;
+            _systemTransaction = systemTransaction;
         }
 
         [Authorize(Roles ="Admin")]
