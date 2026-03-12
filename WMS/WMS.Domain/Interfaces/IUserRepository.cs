@@ -10,5 +10,6 @@ namespace WMS.Domain.Interfaces
     public interface IUserRepository : IRepository<User>
     {
         public Task<User> GetByUsernameAsync(string username);
+        public Task<bool> IsUsernameExistAsync(string username);
     }
 }

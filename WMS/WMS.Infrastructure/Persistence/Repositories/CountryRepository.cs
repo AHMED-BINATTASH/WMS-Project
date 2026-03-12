@@ -73,5 +73,10 @@ namespace WMS.Infrastructure.Persistence.Repositories
         {
             return await _dbContext.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> IsExistByCountryIDAsync(int countryID)
+        {
+            return await _dbContext.Countries.AnyAsync(c => c.CountryID == countryID);
+        }
     }
 }

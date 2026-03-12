@@ -11,5 +11,6 @@ namespace WMS.Application.Interfaces
     public interface ICountryService : IService<CountryDto,Country>
     {
         Task<bool> IsExistByCountryName(string CountryName);
+        Task<bool> IsExistByCountryID(int CountryID);
     }
 }

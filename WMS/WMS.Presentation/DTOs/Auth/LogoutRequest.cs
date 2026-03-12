@@ -3,6 +3,6 @@
     public sealed record class LogoutRequest
     {
         public string Username { get; set; }
-        public string RefreshToken { get; set; }
+        //public string RefreshToken { get; set; }
     }
 }

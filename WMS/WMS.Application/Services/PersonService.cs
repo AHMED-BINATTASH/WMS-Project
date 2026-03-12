@@ -55,5 +55,10 @@ namespace WMS.Application.Services
         {
             return await _repository.IsExistByEmailIDAsync(Email);
         }
+
+        public async Task<bool> IsExistByPersonID(int PersonID)
+        {
+            return await _repository.IsExistByPersonIDAsync(PersonID);
+        }
     }
 }

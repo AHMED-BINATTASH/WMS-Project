@@ -16,10 +16,6 @@ namespace WMS.Application.Services
         {
             _repository = repository;
         }
-        public async Task<bool> Save()
-        {
-            SystemTransaction systemTransaction = new
-            return await _repository.Add();
-        }
+       
     }
 }

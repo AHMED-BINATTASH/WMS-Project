@@ -12,5 +12,6 @@ namespace WMS.Application.Interfaces
     {
         Task<bool> IsExistByNationalID(string PersonName);
         Task<bool> IsExistByEmail(string PersonName);
+        Task<bool> IsExistByPersonID(int PersonID);
     }
 }

@@ -16,6 +16,12 @@ namespace WMS.Application.Mappings
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();
 
+            CreateMap<User, UserSlimDto>();
+            CreateMap<UserDto, UserSlimDto>();
+
+            CreateMap<UserAddDto, User>();
+            CreateMap<User, UserAddDto>();
+
         }
     }
 }
