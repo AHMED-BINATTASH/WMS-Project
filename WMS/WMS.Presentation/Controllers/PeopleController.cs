@@ -16,7 +16,6 @@ namespace WMS.Presentation.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private readonly JWTSettings _jWTSettings;
         private readonly IPersonService _PersonService;
         private readonly ICountryService _CountryService;
         private readonly IStringLocalizer<SharedResource> _localizer;
@@ -24,7 +23,6 @@ namespace WMS.Presentation.Controllers
 
         public PersonController(JWTSettings jWTSettings, IPersonService PersonService, ICountryService countryService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
         {
-            _jWTSettings = jWTSettings;
             _PersonService = PersonService;
             _CountryService = countryService;
             _localizer = localizer;
