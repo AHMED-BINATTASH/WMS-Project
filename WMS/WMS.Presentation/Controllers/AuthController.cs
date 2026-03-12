@@ -22,12 +22,14 @@ namespace WMS.Presentation.Controllers
     {
         private readonly TokenService _tokenService;
         private readonly IUserService _UserService;
+        private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResource> _localizer;
 
-        public AuthController(JWTSettings jWTSettings, IUserService userService, IStringLocalizer<SharedResource> localizer)
+        public AuthController(JWTSettings jWTSettings, IUserService userService, IMapper mapper,IStringLocalizer<SharedResource> localizer)
         {
             _tokenService = new TokenService(jWTSettings);
             _UserService = userService;
+            _mapper = mapper;
             _localizer = localizer;
         }
 
@@ -64,14 +66,12 @@ namespace WMS.Presentation.Controllers
 
             if (await _UserService.Update(User))
             {
-                var tokenResponse = new TokenResponse
-                {
-                    AccessToken = accessToken,
-                    RefreshToken = refreshToken
-                };
+                _SetRefreshTokenCookie(refreshToken, User.RefreshTokenExpiredAt.Value);
 
-                return Ok(ApiResponse<TokenResponse>.SuccessResponse(
-                    data: tokenResponse,
+                var UserDto = _mapper.Map<UserSlimDto>(User);
+
+                return Ok(ApiResponse<object>.SuccessResponse(
+                    data: new { User = UserDto, AccessToken = accessToken, FirstName = User.PersonInfo.FirstName },
                     message: _localizer["LoginSuccess"].Value,
                     code: ResultCode.Success
                 ));
@@ -87,6 +87,14 @@ namespace WMS.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Refresh([FromBody] RefreshRequest request)
         {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            if (string.IsNullOrEmpty(refreshToken))
+                return Unauthorized(ApiResponse<object>.FailureResponse(
+                   message: _localizer["InvalidRefreshToken"].Value,
+                   code: ResultCode.Unauthorized
+                   ));
+
             var User = await _UserService.GetByUsername(request.Username);
 
             if (User == null)
@@ -95,24 +103,30 @@ namespace WMS.Presentation.Controllers
                     code: ResultCode.InvalidRequest
                     ));
 
+            if (!User.IsActive)
+                return Unauthorized(ApiResponse<object>.FailureResponse(
+                    message: _localizer["InvalidUserLoginAllowed"].Value,
+                    code: ResultCode.Unauthorized
+                    ));
+
             if (User.RefreshTokenRevokedAt != null)
                 return Unauthorized(ApiResponse<object>.FailureResponse(
                     message: _localizer["RefreshTokenIsRevoked"].Value,
-                    code: ResultCode.InvalidRequest
+                    code: ResultCode.Unauthorized
                     ));
 
 
             if (User.RefreshTokenExpiredAt == null || User.RefreshTokenExpiredAt <= DateTime.UtcNow)
                 return Unauthorized(ApiResponse<object>.FailureResponse(
                     message: _localizer["RefreshTokenExpired"].Value,
-                    code: ResultCode.InvalidRequest
+                    code: ResultCode.Unauthorized
                     ));
 
-            bool refreshValid = BCrypt.Net.BCrypt.Verify(request.RefreshToken, User.RefreshTokenHash);
+            bool refreshValid = BCrypt.Net.BCrypt.Verify(refreshToken, User.RefreshTokenHash);
             if (!refreshValid)
                 return Unauthorized(ApiResponse<object>.FailureResponse(
                     message: _localizer["InvalidRefreshToken"].Value,
-                    code: ResultCode.InvalidRequest
+                    code: ResultCode.Unauthorized
                     ));
 
             UserAccessTokenModel userAccessTokenModel =
@@ -128,9 +142,10 @@ namespace WMS.Presentation.Controllers
 
             var tokenResponse = new TokenResponse
             {
-                AccessToken = newAccessToken,
-                RefreshToken = newRefreshToken
+                AccessToken = newAccessToken
             };
+
+            _SetRefreshTokenCookie(newRefreshToken, User.RefreshTokenExpiredAt.Value);
 
             return Ok(ApiResponse<TokenResponse>.SuccessResponse(
                 data: tokenResponse,
@@ -146,8 +161,9 @@ namespace WMS.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
         {
-            if (request == null || string.IsNullOrWhiteSpace(request.Username) ||
-                string.IsNullOrWhiteSpace(request.RefreshToken))
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            if (request == null || string.IsNullOrWhiteSpace(request.Username))
                 return BadRequest(ApiResponse<object>.FailureResponse(
                     message: _localizer["InvalidRefreshRequest"].Value,
                     code: ResultCode.InvalidRequest
@@ -164,11 +180,24 @@ namespace WMS.Presentation.Controllers
             User.RefreshTokenRevokedAt = DateTime.UtcNow;
             await _UserService.Update(User);
 
+            Response.Cookies.Delete("refreshToken");
             return Ok(ApiResponse<object>.SuccessResponse(
                            data: null,
                            message: _localizer["LogoutSuccess"].Value,
                            code: ResultCode.Success
                        ));
+        }
+
+        private void _SetRefreshTokenCookie(string token, DateTime expires)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = expires
+            };
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
 
         //[HttpGet("me")]

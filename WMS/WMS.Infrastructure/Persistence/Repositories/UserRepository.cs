@@ -33,6 +33,9 @@ namespace WMS.Infrastructure.Persistence.Repositories
             if (user == null) 
                 return false;
 
+            if(!user.IsActive)
+                return true;
+
             user.IsActive = false;
 
             return await Save();
@@ -66,11 +69,25 @@ namespace WMS.Infrastructure.Persistence.Repositories
         }
         public async Task<User> GetByUsernameAsync(string username)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == username);
+            if (string.IsNullOrEmpty(username))
+                return null;
+
+            return await _dbContext.Users
+                    .Include(u => u.PersonInfo)
+                    .FirstOrDefaultAsync(x => x.Username == username);
         }
         public async Task<bool> Save()
         {
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsUsernameExistAsync(string username)
+        {
+            if (!string.IsNullOrEmpty(username))
+                return false;
+
+            return await _dbContext.Users
+                            .AnyAsync(c => c.Username == username);
         }
     }
 }

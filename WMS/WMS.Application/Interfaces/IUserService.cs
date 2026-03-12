@@ -11,7 +11,7 @@ namespace WMS.Application.Interfaces
     public interface IUserService : IService<UserDto,User>
     {
         Task<User> GetByUsername(string username);
-        //Task<bool> IsExistByUsername(string username);
+        Task<bool> IsUsernameExist(string username);
 
     }
 }

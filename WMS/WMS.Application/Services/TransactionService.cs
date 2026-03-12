@@ -10,13 +10,12 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class TransactionService 
+    public class TransactionService
     {
-       
+
         private readonly ITransaction _transaction;
-        public TransactionService( ITransaction transaction)
+        public TransactionService(ITransaction transaction)
         {
-          
             _transaction = transaction;
         }
         public void SaveTransaction()

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +17,12 @@ namespace WMS.Presentation.Controllers
     [ApiController]
     public class CountryController : ControllerBase
     {
-        private readonly JWTSettings _jWTSettings;
         private readonly ICountryService _CountryService;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
 
-        public CountryController(JWTSettings jWTSettings, ICountryService CountryService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
+        public CountryController(ICountryService CountryService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
         {
-            _jWTSettings = jWTSettings;
             _CountryService = CountryService;
             _localizer = localizer;
             _mapper = mapper;
