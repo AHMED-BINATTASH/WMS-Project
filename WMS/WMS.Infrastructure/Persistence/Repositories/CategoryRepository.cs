@@ -12,7 +12,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class CategoryRepository : IRepository<Category>
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -72,6 +72,14 @@ namespace WMS.Infrastructure.Persistence.Repositories
         public async Task<bool> Save()
         {
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsExistByName(string categoryName)
+        {
+            if (string.IsNullOrEmpty(categoryName))
+                return false;
+
+            return await _dbContext.Categories.AnyAsync();
         }
     }
 }
