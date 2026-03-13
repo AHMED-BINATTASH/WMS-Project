@@ -80,7 +80,6 @@ namespace WMS.Presentation.Controllers
             return StatusCode(500, _localizer["ServerError"].Value);
         }
 
-        [Authorize]
         [HttpPost("refresh")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -192,14 +191,14 @@ namespace WMS.Presentation.Controllers
         {
             var cookieOptions = new CookieOptions
             {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = expires
+                HttpOnly = true, 
+                Secure = true,   
+                SameSite = SameSiteMode.None,
+                Expires = expires,
+                Path = "/"
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
-
         //[HttpGet("me")]
         //[Authorize]
         //public IActionResult GetCurrentUser()

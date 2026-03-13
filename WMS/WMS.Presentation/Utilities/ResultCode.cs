@@ -12,8 +12,9 @@
         public const string ValidationError = "VALIDATION_ERROR";
         public const string NotFound = "NOT_FOUND";
 
-        public const string AlreadyExists = "ALREADY_EXISTS";
-
+        public const string AlreadyExists = "ALREADY_EXISTS"
+            ;
+        public const string TokenExpired = "TOKEN_EXPIRED";
         public const string Unauthorized = "UNAUTHORIZED";
         public const string Forbidden = "FORBIDDEN";
 
