@@ -33,7 +33,7 @@ namespace WMS.Presentation.Services
                 issuer: _jWTSettings.Issuer,
                 audience: _jWTSettings.Audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
+                expires: DateTime.UtcNow.AddSeconds(10),
                 signingCredentials: creds
             );
 
