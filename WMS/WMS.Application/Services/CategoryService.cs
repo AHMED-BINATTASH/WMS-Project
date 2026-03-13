@@ -12,42 +12,46 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class CategoryService : IService<CategoryDto, Category>
+    public class CategoryService : ICategoryService
     {
-        private readonly IRepository<Category> _repository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public CategoryService(IRepository<Category> repository, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
         {
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
-            _repository = repository;
         }
 
         public async Task<bool> AddNew(Category Entity)
         {
-            return await _repository.Add(Entity); 
+            return await _categoryRepository.Add(Entity); 
         }
         public async Task<bool> Delete(int id)
         {
-            return await _repository.Delete(id);
+            return await _categoryRepository.Delete(id);
         }
 
         public async Task<IEnumerable<CategoryDto>?> GetAll()
         {
-            IEnumerable<Category> Cateories = await _repository.GetAllAsync();
+            IEnumerable<Category> Cateories = await _categoryRepository.GetAllAsync();
 
             return _mapper.Map<IEnumerable<CategoryDto>>(Cateories);
         }
 
         public async Task<CategoryDto?> GetByID(int id)
         {
-            Category Category = await _repository.GetByIdAsync(id);
+            Category Category = await _categoryRepository.GetByIdAsync(id);
             return Category != null ? _mapper.Map<CategoryDto>(Category) : null;
         }
 
 
         async public Task<bool> Update(Category Entity)
         {
-            return await _repository.Update(Entity);
+            return await _categoryRepository.Update(Entity);
+        }
+        public async Task<bool> IsExistByName(string categoryName)
+        {
+           return await _categoryRepository.IsExistByName(categoryName);
         }
     }
 }
