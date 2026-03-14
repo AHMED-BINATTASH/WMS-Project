@@ -9,7 +9,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    public class UnitRepository : IRepository<Unit>
+    public class UnitRepository : IUnitRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -64,6 +64,14 @@ namespace WMS.Infrastructure.Persistence.Repositories
         public async Task<bool> Save()
         {
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsExistByName(string unitName)
+        {
+            if (string.IsNullOrEmpty(unitName))
+                return false;
+
+            return await _dbContext.Units.AnyAsync(u => u.UnitName == unitName);
         }
     }
 }

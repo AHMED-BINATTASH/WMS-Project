@@ -9,7 +9,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    public class WarehouseStockRepository : IRepository<WarehouseStock>
+    public class WarehouseStockRepository : IWarehouseStockRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -66,6 +66,14 @@ namespace WMS.Infrastructure.Persistence.Repositories
         public async Task<bool> Save()
         {
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsExistCombination(int warehouseId, int itemId)
+        {
+            if (itemId < 1 || itemId < 1)
+                return false;
+
+            return await _dbContext.WarehouseStocks.AnyAsync(ws => ws.WarehouseID == warehouseId && ws.ItemID == itemId);
         }
     }
 }

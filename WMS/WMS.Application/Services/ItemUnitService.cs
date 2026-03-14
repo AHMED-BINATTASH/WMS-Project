@@ -11,12 +11,12 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class ItemUnitService : IService<ItemUnitDto, ItemUnit>
+    public class ItemUnitService : IItemUnitService
     {
-        private readonly IRepository<ItemUnit> _repository;
+        private readonly IItemUnitRepository _repository;
         private readonly IMapper _mapper;
 
-        public ItemUnitService(IRepository<ItemUnit> repository, IMapper mapper)
+        public ItemUnitService(IItemUnitRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -52,5 +52,10 @@ namespace WMS.Application.Services
         {
             return await _repository.Update(Entity);
         }
+        public Task<bool> IsExistCombination(int itemId, int unitId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

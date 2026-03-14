@@ -11,12 +11,12 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class ItemService : IService<ItemDto, Item>
+    public class ItemService : IItemService
     {
-        private readonly IRepository<Item> _repository;
+        private readonly IItemRepository _repository;
         private readonly IMapper _mapper;
 
-        public ItemService(IRepository<Item> repository, IMapper mapper)
+        public ItemService(IItemRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -47,9 +47,15 @@ namespace WMS.Application.Services
             return _mapper.Map<ItemDto>(item);
 
         }
+
+
         public async Task<bool> Update(Item Entity)
         {
             return await _repository.Update(Entity);
+        }
+        public Task<bool> IsExistByName(string itemName)
+        {
+            return _repository.IsExistByName(itemName);
         }
     }
 }

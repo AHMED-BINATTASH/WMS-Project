@@ -12,12 +12,12 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Application.Services
 {
-    public class WarehouseStockService : IService<WarehouseStockDto, WarehouseStock>
+    public class WarehouseStockService : IWarehouseStockService
     {
-        private readonly IRepository<WarehouseStock> _repository;
+        private readonly IWarehouseStockRepository _repository;
         private readonly IMapper _mapper;
 
-        public WarehouseStockService(IRepository<WarehouseStock> repository, IMapper mapper)
+        public WarehouseStockService(IWarehouseStockRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -46,9 +46,14 @@ namespace WMS.Application.Services
             return _mapper.Map<WarehouseStockDto>(warehouseStock);
         }
 
+
         public async Task<bool> Update(WarehouseStock Entity)
         {
             return await _repository.Update(Entity);
+        }
+        public async Task<bool> IsExistCombination(int warehouseId, int itemId)
+        {
+            return await _repository.IsExistCombination(warehouseId, itemId);
         }
     }
 }
