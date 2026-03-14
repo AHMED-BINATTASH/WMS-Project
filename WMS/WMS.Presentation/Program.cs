@@ -14,6 +14,8 @@ using WMS.Application.Interfaces;
 using WMS.Application.Services;
 using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Authorization;
+using WMS.Application.DTOs;
+using WMS.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +53,9 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 
 builder.Services.AddScoped<IUnitService, UnitService>();
 builder.Services.AddScoped<IUnitRepository, UnitRepository>();
+
+builder.Services.AddScoped<IService<ItemUnitDto, ItemUnit>, ItemUnitService>();
+builder.Services.AddScoped<IRepository<ItemUnit>,ItemUnitRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
