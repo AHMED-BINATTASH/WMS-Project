@@ -79,7 +79,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
             if (string.IsNullOrEmpty(categoryName))
                 return false;
 
-            return await _dbContext.Categories.AnyAsync();
+            return await _dbContext.Categories.AnyAsync(c => c.CategoryName == categoryName);
         }
     }
 }

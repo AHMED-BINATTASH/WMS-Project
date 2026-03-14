@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 // ==========================================
-// 1) الخدمات الأساسية وقاعدة البيانات
+//               Main Services
 // ==========================================
 builder.Services.AddControllers();
 builder.Services.AddLocalization();
@@ -32,7 +32,7 @@ var jwtOptions = builder.Configuration.GetSection("JWT").Get<JWTSettings>();
 builder.Services.AddSingleton<JWTSettings>(jwtOptions!);
 
 // ==========================================
-// 2) حقن الاعتماديات (Dependency Injection)
+//           Dependency Injection
 // ==========================================
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
@@ -46,10 +46,12 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddScoped<IItemService, ItemService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // ==========================================
-// 3) إعدادات الـ CORS (مهمة جداً للكوكيز)
+//    إعدادات الـ CORS (مهمة جداً للكوكيز)
 // ==========================================
 builder.Services.AddCors(options => {
     options.AddPolicy("MyPolicy", policy => {
@@ -61,7 +63,7 @@ builder.Services.AddCors(options => {
 });
 
 // ==========================================
-// 4) المصادقة والتفويض (Authentication & Authorization)
+//     (Authentication & Authorization)
 // ==========================================
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -124,7 +126,7 @@ builder.Services.AddSingleton<IAuthorizationHandler, PersonOwnerOrAdminHandler>(
 builder.Services.AddSingleton<IAuthorizationHandler, UserOwnerOrAdminHandler>();
 
 // ==========================================
-// 5) تحديد معدل الطلبات (Rate Limiting)
+//              (Rate Limiting)
 // ==========================================
 builder.Services.AddRateLimiter(options =>
 {
@@ -142,7 +144,7 @@ builder.Services.AddRateLimiter(options =>
 });
 
 // ==========================================
-// 6) إعدادات Swagger
+//                  Swagger
 // ==========================================
 builder.Services.AddSwaggerGen(options =>
 {
@@ -167,7 +169,7 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 // ==========================================
-// 7) خط معالجة الطلبات (Middleware Pipeline)
+//           (Middleware Pipeline)
 // ==========================================
 
 app.UseCors("MyPolicy");

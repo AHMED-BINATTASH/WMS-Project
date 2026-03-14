@@ -9,7 +9,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    public class ItemRepository : IRepository<Item>
+    public class ItemRepository : IItemRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -71,6 +71,14 @@ namespace WMS.Infrastructure.Persistence.Repositories
         public async Task<bool> Save()
         {
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsExistByName(string itemName)
+        {
+            if (string.IsNullOrEmpty(itemName))
+                return false;
+
+            return await _dbContext.Items.AnyAsync(i => i.ItemName == itemName);
         }
     }
 }
