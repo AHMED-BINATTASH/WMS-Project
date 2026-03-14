@@ -54,8 +54,11 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IUnitService, UnitService>();
 builder.Services.AddScoped<IUnitRepository, UnitRepository>();
 
-builder.Services.AddScoped<IService<ItemUnitDto, ItemUnit>, ItemUnitService>();
-builder.Services.AddScoped<IRepository<ItemUnit>,ItemUnitRepository>();
+builder.Services.AddScoped<IItemUnitService, ItemUnitService>();
+builder.Services.AddScoped<IItemUnitRepository,ItemUnitRepository>();
+
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
+builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

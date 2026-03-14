@@ -9,7 +9,7 @@ using WMS.Domain.Interfaces;
 
 namespace WMS.Infrastructure.Persistence.Repositories
 {
-    public class WarehouseRepository : IRepository<Warehouse>
+    public class WarehouseRepository : IWarehouseRepository
     {
         private readonly AppDbContext _dbContext;
 
@@ -64,6 +64,14 @@ namespace WMS.Infrastructure.Persistence.Repositories
         public async Task<bool> Save()
         {
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> IsExistByName(string warehouseName)
+        {
+            if (string.IsNullOrEmpty(warehouseName))
+                return false;
+
+            return await _dbContext.Warehouses.AnyAsync(w => w.WarehouseName == warehouseName);
         }
     }
 }
