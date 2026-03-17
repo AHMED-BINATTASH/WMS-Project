@@ -18,7 +18,7 @@ namespace WMS.Infrastructure.Configurations
 
             builder.HasOne(c => c.ParentCategoryInfo)
                    .WithMany()
-                   .HasForeignKey(c => c.ParentCategoryId)
+                   .HasForeignKey(c => c.ParentCategoryID)
                    .OnDelete(DeleteBehavior.NoAction); // this will set Null for parent record and childern will be orphaned
         }
     }

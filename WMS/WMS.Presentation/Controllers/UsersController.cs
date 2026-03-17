@@ -84,10 +84,11 @@ namespace WMS.Presentation.Controllers
             ));
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("Add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Add([FromBody] UserAddDto UserToAddDto)
         {
             if (string.IsNullOrWhiteSpace(UserToAddDto.Username) || string.IsNullOrWhiteSpace(UserToAddDto.Password))
@@ -101,6 +102,10 @@ namespace WMS.Presentation.Controllers
             if (isUsernameTaken)
                 return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Username_Already_Taken"]));
 
+            bool isAlreadyUsername = await _UserService.IsPersonExist(UserToAddDto.PersonID);
+            if (isAlreadyUsername)
+                return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Person_Already_User"])); 
+            
             User userEntity = _mapper.Map<User>(UserToAddDto);
 
             userEntity.Username = userEntity.Username.Trim();
@@ -126,18 +131,47 @@ namespace WMS.Presentation.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromBody] UserSlimDto requestUserCrudDto)
         {
             if (requestUserCrudDto == null || requestUserCrudDto.UserID <= 0)
                 return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Invalid_Request"]));
 
+            // 1. التأكد من وجود المستخدم الأصلي في الداتابيز
             var currentUser = await _UserService.GetByID(requestUserCrudDto.UserID);
             if (currentUser == null)
                 return NotFound(ApiResponse<object>.FailureResponse(message: _localizer["User_Not_Found"]));
 
-            User userToUpdate = _mapper.Map<User>(requestUserCrudDto);
+            // 2. إذا تم تغيير الـ PersonID، نتحقق من وجوده وأنه غير مستخدم من حساب آخر
+            if (requestUserCrudDto.PersonID != currentUser.PersonID)
+            {
+                bool isPersonExist = await _PersonService.IsExistByPersonID(requestUserCrudDto.PersonID);
+                if (!isPersonExist)
+                    return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Person_Not_Found"]));
 
-            var result = await _UserService.Update(userToUpdate);
+                bool isAlreadyUser = await _UserService.IsPersonExist(requestUserCrudDto.PersonID);
+                if (isAlreadyUser)
+                    return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Person_Already_User"]));
+            }
+
+            // 3. التحقق من اسم المستخدم: إذا تغير، نتأكد أنه غير محجوز لغيره
+            if (requestUserCrudDto.Username.Trim().ToLower() != currentUser.Username.Trim().ToLower())
+            {
+                bool isUsernameTaken = await _UserService.IsUsernameExist(requestUserCrudDto.Username.Trim());
+                if (isUsernameTaken)
+                    return BadRequest(ApiResponse<object>.FailureResponse(message: _localizer["Username_Already_Taken"]));
+            }
+
+            // 4. عملية الـ Mapping (يفضل استخدام الـ Entity الموجود أصلاً وتحديثه لتجنب مشاكل الـ Tracking)
+            var User = _mapper.Map<User>(currentUser);
+
+            var PersonDto =  await _PersonService.GetByID(User.PersonID);
+
+            User.PersonInfo = _mapper.Map<Person>(PersonDto);
+
+            var result = await _UserService.Update(User);
 
             if (result)
             {
@@ -148,7 +182,6 @@ namespace WMS.Presentation.Controllers
 
             return StatusCode(500, ApiResponse<object>.FailureResponse(message: _localizer["Server_Error"]));
         }
-
         [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)

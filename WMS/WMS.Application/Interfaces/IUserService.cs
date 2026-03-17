@@ -12,6 +12,7 @@ namespace WMS.Application.Interfaces
     {
         Task<User> GetByUsername(string username);
         Task<bool> IsUsernameExist(string username);
+        Task<bool> IsPersonExist(int PersonID);
 
     }
 }

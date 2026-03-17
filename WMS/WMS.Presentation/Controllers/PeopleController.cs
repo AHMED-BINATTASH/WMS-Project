@@ -21,7 +21,7 @@ namespace WMS.Presentation.Controllers
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
 
-        public PersonController(JWTSettings jWTSettings, IPersonService PersonService, ICountryService countryService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
+        public PersonController(IPersonService PersonService, ICountryService countryService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
         {
             _PersonService = PersonService;
             _CountryService = countryService;
@@ -205,9 +205,16 @@ namespace WMS.Presentation.Controllers
         [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Delete(int id)
         {
+            if (id < 1)
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Invalid_ID"],
+                    code: ResultCode.InvalidRequest));
+
             var result = await _PersonService.Delete(id);
+
             if (result)
             {
                 return Ok(ApiResponse<object>.SuccessResponse(

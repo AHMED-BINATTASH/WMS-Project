@@ -69,7 +69,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
             return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> IsExistCombination(int itemId, int unitId)
+        public async Task<bool> IsExistCombinationAsync(int itemId, int unitId)
         {
             if (itemId < 1 || unitId < 1)
                 return false;

@@ -105,6 +105,25 @@ namespace WMS.Presentation.Controllers
         {
             Warehouse warehouse = _mapper.Map<Warehouse>(RequestWarehouseDto);
 
+            var warehouseFromDB = await _warehouseService.GetByID(warehouse.WarehouseID);
+            if (warehouseFromDB == null)
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Invalid_Request"],
+                    code: ResultCode.InvalidRequest));
+            }
+
+            if(warehouseFromDB.WarehouseID == warehouse.WarehouseID &&
+                warehouseFromDB.WarehouseName == warehouse.WarehouseName &&
+                warehouseFromDB.WarehouseCode == warehouse.WarehouseCode &&
+                warehouseFromDB.IsActive == warehouse.IsActive &&
+                warehouseFromDB.Location == warehouse.Location)
+            {
+                return Ok(ApiResponse<object>.SuccessResponse(
+               message: _localizer["Warehouse_Updated"],
+               code: ResultCode.Success));
+            }
+
             bool IsUpdated = await _warehouseService.Update(warehouse);
 
             if (!IsUpdated)

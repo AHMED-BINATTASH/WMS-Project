@@ -11,5 +11,6 @@ namespace WMS.Domain.Interfaces
     {
         public Task<User> GetByUsernameAsync(string username);
         public Task<bool> IsUsernameExistAsync(string username);
+        public Task<bool> IsPersonExistAsync(int PersonID);
     }
 }
