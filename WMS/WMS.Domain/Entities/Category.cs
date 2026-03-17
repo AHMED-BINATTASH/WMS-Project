@@ -11,16 +11,16 @@ namespace WMS.Domain.Entities
         public int CategoryID { get; private set; }
         public string CategoryName { get; set; }
         public string? Description { get; set; }
-        public int? ParentCategoryId { get; set; }
+        public int? ParentCategoryID { get; set; }
         public Category? ParentCategoryInfo { get; set; }
 
         // This constructor for EF Core to can create instance from Category class
         private Category() { }
 
         // Constructor
-        public Category(int categoryId,Category parentCategoryInfo)
+        public Category(int categoryID,Category parentCategoryInfo)
         {
-            this.CategoryID = categoryId;
+            this.CategoryID = categoryID;
             this.ParentCategoryInfo = parentCategoryInfo;
         }
     }

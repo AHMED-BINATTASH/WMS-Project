@@ -101,9 +101,28 @@ namespace WMS.Presentation.Controllers
         [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromBody] UnitDto RequestUnitDto)
         {
             Unit unit = _mapper.Map<Unit>(RequestUnitDto);
+
+            var UnitFromDB = await _unitService.GetByID(unit.UnitID);
+
+            if (UnitFromDB == null)
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Invalid_Request"],
+                    code: ResultCode.InvalidRequest));
+            }
+
+            if(UnitFromDB.UnitID == unit.UnitID &&
+                UnitFromDB.UnitName == unit.UnitName &&
+                UnitFromDB.UnitSymbol == unit.UnitSymbol)
+            {
+                return Ok(ApiResponse<object>.SuccessResponse(
+                message: _localizer["Unit_Updated"],
+                code: ResultCode.Success));
+            }
 
             bool IsUpdated = await _unitService.Update(unit);
 

@@ -54,7 +54,7 @@ namespace WMS.Application.Services
         }
         public Task<bool> IsExistCombination(int itemId, int unitId)
         {
-            throw new NotImplementedException();
+            return _repository.IsExistCombinationAsync(itemId, unitId);
         }
 
     }

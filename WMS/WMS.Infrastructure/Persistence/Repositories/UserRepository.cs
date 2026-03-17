@@ -83,11 +83,20 @@ namespace WMS.Infrastructure.Persistence.Repositories
 
         public async Task<bool> IsUsernameExistAsync(string username)
         {
-            if (!string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username))
                 return false;
 
             return await _dbContext.Users
                             .AnyAsync(c => c.Username == username);
+        }
+
+        public async Task<bool> IsPersonExistAsync(int PersonID)
+        {
+            if (PersonID <= 0)
+                return false;
+
+            return await _dbContext.Users
+                            .AnyAsync(c => c.PersonID == PersonID);
         }
     }
 }

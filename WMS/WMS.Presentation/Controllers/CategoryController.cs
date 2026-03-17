@@ -89,7 +89,7 @@ namespace WMS.Presentation.Controllers
 
             return CreatedAtAction(
                 nameof(GetById), 
-                new { id = categoryDto.CategoryId },
+                new { id = categoryDto.CategoryID },
                 ApiResponse<CategoryDto>.SuccessResponse(
                     data: categoryDto,
                     message: _localizer["Category_Created"],

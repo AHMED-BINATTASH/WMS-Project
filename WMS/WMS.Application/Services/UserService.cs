@@ -56,5 +56,10 @@ namespace WMS.Application.Services
             return await _repository.IsUsernameExistAsync(username);
         }
 
+        public async Task<bool> IsPersonExist(int PersonID)
+        {
+            return await _repository.IsPersonExistAsync(PersonID);
+        }
+
     }
 }

@@ -66,7 +66,7 @@ namespace WMS.Infrastructure.Persistence.Repositories
             return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> IsExistByName(string unitName)
+        public async Task<bool> IsExistByNameAsync(string unitName)
         {
             if (string.IsNullOrEmpty(unitName))
                 return false;

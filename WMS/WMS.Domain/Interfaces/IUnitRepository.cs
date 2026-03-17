@@ -9,6 +9,6 @@ namespace WMS.Domain.Interfaces
 {
     public interface IUnitRepository : IRepository<Unit>
     {
-        public Task<bool> IsExistByName(string unitName);
+        public Task<bool> IsExistByNameAsync(string unitName);
     }
 }

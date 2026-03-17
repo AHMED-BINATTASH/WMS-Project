@@ -49,9 +49,9 @@ namespace WMS.Application.Services
         {
             return await _repository.Update(Entity);
         }
-        public Task<bool> IsExistByName(string unitName)
+        public async Task<bool> IsExistByName(string unitName)
         {
-            throw new NotImplementedException();
+            return await _repository.IsExistByNameAsync(unitName);
         }
 
     }

@@ -19,5 +19,6 @@
         public const string Forbidden = "FORBIDDEN";
 
         public const string InternalError = "INTERNAL_SERVER_ERROR";
+        public const string ServerWork = "SERVER_WORK";
     }
 }

@@ -9,6 +9,6 @@ namespace WMS.Domain.Interfaces
 {
     public interface IItemUnitRepository : IRepository<ItemUnit>
     {
-        public Task<bool> IsExistCombination(int itemId, int unitId);
+        public Task<bool> IsExistCombinationAsync(int itemId, int unitId);
     }
 }

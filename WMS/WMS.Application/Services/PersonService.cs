@@ -60,5 +60,6 @@ namespace WMS.Application.Services
         {
             return await _repository.IsExistByPersonIDAsync(PersonID);
         }
+
     }
 }

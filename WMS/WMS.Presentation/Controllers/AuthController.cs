@@ -199,6 +199,17 @@ namespace WMS.Presentation.Controllers
             };
             Response.Cookies.Append("refreshToken", token, cookieOptions);
         }
+
+        [Authorize]
+        [HttpGet("validate-session")]
+        public IActionResult ValidateSession()
+        {
+            return Ok (ApiResponse<object>.SuccessResponse(
+                message: "Session is active",
+                code: ResultCode.ServerWork
+                ));
+        }
+
         //[HttpGet("me")]
         //[Authorize]
         //public IActionResult GetCurrentUser()

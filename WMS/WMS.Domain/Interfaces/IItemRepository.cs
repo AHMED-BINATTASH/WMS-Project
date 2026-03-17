@@ -9,6 +9,6 @@ namespace WMS.Domain.Interfaces
 {
     public interface IItemRepository : IRepository<Item>
     {
-        public Task<bool> IsExistByName(string itemName);
+        public Task<bool> IsExistByNameAsync(string itemName);
     }
 }

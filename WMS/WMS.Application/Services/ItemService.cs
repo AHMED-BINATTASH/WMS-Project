@@ -55,7 +55,7 @@ namespace WMS.Application.Services
         }
         public Task<bool> IsExistByName(string itemName)
         {
-            return _repository.IsExistByName(itemName);
+            return _repository.IsExistByNameAsync(itemName);
         }
     }
 }

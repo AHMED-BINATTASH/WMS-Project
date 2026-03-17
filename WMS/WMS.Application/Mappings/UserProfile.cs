@@ -14,14 +14,21 @@ namespace WMS.Application.Mappings
         public UserProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
 
             CreateMap<User, UserSlimDto>();
-            CreateMap<UserDto, UserSlimDto>();
 
-            CreateMap<UserAddDto, User>();
+            CreateMap<UserAddDto, User>()
+                .ForMember(dest => dest.UserID, opt => opt.Ignore()); 
+
+            CreateMap<UserSlimDto, User>()
+                .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<UserDto, User>();
             CreateMap<User, UserAddDto>();
+            CreateMap<UserDto, UserSlimDto>();
+            CreateMap<UserSlimDto, UserDto>();
 
+            CreateMap<UserAddDto, UserSlimDto>();
         }
     }
 }

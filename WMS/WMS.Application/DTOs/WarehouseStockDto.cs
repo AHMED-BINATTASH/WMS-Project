@@ -10,16 +10,13 @@ namespace WMS.Application.DTOs
     public record WarehouseStockDto(
      int WarehouseStockID,
      int WarehouseID,
-     Warehouse WarehouseInfo, 
      int ItemID,
-     Item ItemInfo,      
      int Quantity,
      string BatchNumber,
      decimal ActualCost,
      DateTime ProductionDate,
      DateTime ExpiryDate,
      DateTime CreatedAt,
-     int CreatedBy,
-     User CreatorInfo
+     int CreatedBy
  );
 }

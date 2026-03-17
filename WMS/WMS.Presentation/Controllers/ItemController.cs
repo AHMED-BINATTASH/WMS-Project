@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using System.Security.Claims;
 using WMS.Application.DTOs.WMS.Application.DTOs;
 using WMS.Application.Interfaces;
 using WMS.Application.Services;
@@ -15,12 +17,17 @@ namespace WMS.Presentation.Controllers
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
+        private readonly ICategoryService _categoryService;
+        private readonly IUnitService _unitService;
         private readonly IStringLocalizer<SharedResource> _localizer;
         private readonly IMapper _mapper;
 
-        public ItemController(IItemService itemService, IStringLocalizer<SharedResource> localizer, IMapper mapper)
+        public ItemController(IItemService itemService, ICategoryService CategoryService, IUnitService UnitService,
+            IStringLocalizer<SharedResource> localizer, IMapper mapper)
         {
             _itemService = itemService;
+            _categoryService = CategoryService;
+            _unitService = UnitService;
             _localizer = localizer;
             _mapper = mapper;
         }
@@ -82,6 +89,16 @@ namespace WMS.Presentation.Controllers
                     message: _localizer["Item_Already_Exist"],
                     code: ResultCode.AlreadyExists));
 
+            //var Category = await _categoryService.GetByID(item.CategoryID);
+            //var Unit = await _unitService.GetByID(item.UnitID);
+
+            //item.CategoryInfo = _mapper.Map<Category>(Category);
+            //item.UnitInfo = _mapper.Map<Unit>(Unit);
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            item.CreatedBy = int.Parse(userIdClaim ?? "0");
+            item.CreatedAt = DateTime.UtcNow;
             bool IsAdded = await _itemService.AddNew(item);
 
             if (!IsAdded)
@@ -104,6 +121,28 @@ namespace WMS.Presentation.Controllers
         public async Task<IActionResult> Update([FromBody] ItemDto RequestItemDto)
         {
             Item item = _mapper.Map<Item>(RequestItemDto);
+
+            var ItemFromdb = await _itemService.GetByID(item.ItemID);
+
+            if(ItemFromdb == null)
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Invalid_Request"],
+                    code: ResultCode.InvalidRequest));
+            }
+
+            if(ItemFromdb.ItemID == item.ItemID &&
+               ItemFromdb.UnitID == item.UnitID &&
+               ItemFromdb.IsActive == item.IsActive &&
+               ItemFromdb.ItemName == item.ItemName &&
+               ItemFromdb.Barcode == item.Barcode &&
+               ItemFromdb.CategoryID == item.CategoryID)
+            {
+                return Ok(ApiResponse<object>.SuccessResponse(
+                message: _localizer["Item_Updated"],
+                code: ResultCode.Success));
+            }
+                
 
             bool IsUpdated = await _itemService.Update(item);
 

@@ -107,6 +107,28 @@ namespace WMS.Presentation.Controllers
         {
             WarehouseStock warehouseStock = _mapper.Map<WarehouseStock>(RequestWarehouseStockDto);
 
+            var warehouseStockFromDB = await _warehouseStockService.GetByID(warehouseStock.WarehouseStockID);
+
+            if(warehouseStockFromDB == null)
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Invalid_Request"],
+                    code: ResultCode.InvalidRequest));
+            }
+
+            if (warehouseStockFromDB.WarehouseStockID == warehouseStock.WarehouseStockID &&
+                warehouseStockFromDB.WarehouseID == warehouseStock.WarehouseID &&
+                warehouseStockFromDB.ItemID == warehouseStock.ItemID &&
+                warehouseStockFromDB.Quantity == warehouseStock.Quantity &&
+                warehouseStockFromDB.BatchNumber == warehouseStock.BatchNumber &&
+                warehouseStockFromDB.ActualCost == warehouseStock.ActualCost &&
+                warehouseStockFromDB.ProductionDate == warehouseStock.ProductionDate &&
+                warehouseStockFromDB.ExpiryDate == warehouseStock.ExpiryDate)
+            {
+                return Ok(ApiResponse<object>.SuccessResponse(
+                message: _localizer["WarehouseStock_Updated"],
+                code: ResultCode.Success));
+            }
             bool IsUpdated = await _warehouseStockService.Update(warehouseStock);
 
             if (!IsUpdated)
