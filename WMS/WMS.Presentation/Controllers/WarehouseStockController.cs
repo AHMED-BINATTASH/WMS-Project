@@ -129,6 +129,8 @@ namespace WMS.Presentation.Controllers
                 message: _localizer["WarehouseStock_Updated"],
                 code: ResultCode.Success));
             }
+
+            warehouseStock.CreatedAt = warehouseStockFromDB.CreatedAt;
             bool IsUpdated = await _warehouseStockService.Update(warehouseStock);
 
             if (!IsUpdated)
