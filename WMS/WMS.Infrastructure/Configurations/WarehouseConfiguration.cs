@@ -31,7 +31,7 @@ namespace WMS.Infrastructure.Configurations
                    .IsRequired()
                    .HasDefaultValue(true); 
 
-            builder.HasQueryFilter(w => w.IsActive);
+            //builder.HasQueryFilter(w => w.IsActive);
         }
     }
 }

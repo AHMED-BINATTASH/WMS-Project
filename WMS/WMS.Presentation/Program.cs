@@ -70,7 +70,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // ==========================================
 builder.Services.AddCors(options => {
     options.AddPolicy("MyPolicy", policy => {
-        policy.WithOrigins("http://localhost:8080")
+        policy.WithOrigins("http://localhost:8080", "http://wms-frontend.runasp.net")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials(); 
@@ -189,7 +189,7 @@ var app = builder.Build();
 
 app.UseCors("MyPolicy");
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || 1 == 1)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
