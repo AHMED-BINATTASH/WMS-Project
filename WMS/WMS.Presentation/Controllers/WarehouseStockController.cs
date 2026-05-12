@@ -109,7 +109,7 @@ namespace WMS.Presentation.Controllers
 
             var warehouseStockFromDB = await _warehouseStockService.GetByID(warehouseStock.WarehouseStockID);
 
-            if(warehouseStockFromDB == null)
+            if (warehouseStockFromDB == null)
             {
                 return BadRequest(ApiResponse<object>.FailureResponse(
                     message: _localizer["Invalid_Request"],
@@ -166,5 +166,31 @@ namespace WMS.Presentation.Controllers
                 message: _localizer["WarehouseStock_Deleted"],
                 code: ResultCode.Success));
         }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("Transfer")]
+        public async Task<IActionResult> Transfer([FromBody] WarehouseTransferDto transferDto)
+        {
+            if (transferDto.Quantity <= 0)
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse("Quantity must be greater than zero."));
+            }
+
+            var result = await _warehouseStockService.TransferStock(transferDto);
+
+            if (!result)
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Transfer_Failed"],
+                    code: ResultCode.InvalidRequest));
+            }
+
+            return Ok(ApiResponse<object>.SuccessResponse(
+                message: _localizer["Transfer_Successful"],
+                code: ResultCode.Success));
+        }
     }
+
+
 }

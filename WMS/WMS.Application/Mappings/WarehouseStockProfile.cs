@@ -14,6 +14,9 @@ namespace WMS.Application.Mappings
         public WarehouseStockProfile()
         {
             CreateMap<WarehouseStock, WarehouseStockDto>().ReverseMap();
-        }
+         
+            CreateMap<WarehouseStock, AddWarehouseStockDto>().ReverseMap();
+        
+    }
     }
 }

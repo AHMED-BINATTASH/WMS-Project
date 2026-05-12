@@ -19,4 +19,17 @@ namespace WMS.Application.DTOs
      DateTime CreatedAt,
      int CreatedBy
  );
+
+
+    public record AddWarehouseStockDto(
+          int WarehouseID,
+        int ItemID,
+     int Quantity,
+     string BatchNumber,
+     decimal ActualCost,
+     DateTime ProductionDate,
+     DateTime ExpiryDate,
+     DateTime CreatedAt,
+     int CreatedBy);
+
 }

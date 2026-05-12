@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,26 @@ namespace WMS.Infrastructure.Persistence.Repositories
                 return false;
 
             return await _dbContext.WarehouseStocks.AnyAsync(ws => ws.WarehouseID == warehouseId && ws.ItemID == itemId);
+        }
+
+       
+      
+     
+
+        public async Task<WarehouseStock?> GetStockByWarehouseAndItem(int warehouseId, int itemId)
+        {
+            return await _dbContext.WarehouseStocks
+                .FirstOrDefaultAsync(s => s.WarehouseID == warehouseId && s.ItemID == itemId);
+        }
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        {
+            return await _dbContext.Database.BeginTransactionAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
