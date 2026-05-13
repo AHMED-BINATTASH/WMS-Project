@@ -96,5 +96,12 @@ namespace WMS.Infrastructure.Persistence.Repositories
         {
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<decimal> GetTotalInventoryValue()
+        {
+           return await _dbContext.WarehouseStocks
+                .Where(ws => ws.IsActive )
+                .SumAsync(ws => ws.Quantity * ws.ActualCost);
+        }
     }
 }

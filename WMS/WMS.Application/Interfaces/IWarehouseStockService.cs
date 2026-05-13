@@ -12,6 +12,7 @@ namespace WMS.Application.Interfaces
 {
     public interface IWarehouseStockService : IService<WarehouseStockDto, WarehouseStock>
     {
+        Task<decimal> GetTotalInventoryValue();
         public Task<bool> IsExistCombination(int warehouseId, int itemId);
         public  Task<bool> TransferStock(WarehouseTransferDto transferDto);
 

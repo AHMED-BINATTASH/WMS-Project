@@ -169,6 +169,9 @@ namespace WMS.Presentation.Controllers
 
 
         [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
         [HttpPost("Transfer")]
         public async Task<IActionResult> Transfer([FromBody] WarehouseTransferDto transferDto)
         {
@@ -190,7 +193,27 @@ namespace WMS.Presentation.Controllers
                 message: _localizer["Transfer_Successful"],
                 code: ResultCode.Success));
         }
+
+
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("GetTotalInventoryValue")]
+        public async Task<IActionResult> GetTotalInventoryValue()
+        {
+            decimal totalValue = await _warehouseStockService.GetTotalInventoryValue();
+            if (totalValue <= 0 )
+            {
+                return BadRequest(ApiResponse<object>.FailureResponse(
+                    message: _localizer["Total_Inventory_Value_Calculation_Failed"],
+                    code: ResultCode.InvalidRequest));
+            }
+            return Ok(ApiResponse<decimal>.SuccessResponse(
+                data: totalValue,
+                message: _localizer["Total_Inventory_Value_Calculated"],
+                code: ResultCode.Success));
+        }
+
+
     }
-
-
 }

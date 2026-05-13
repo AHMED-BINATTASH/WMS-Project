@@ -28,7 +28,7 @@ namespace WMS.Domain.Interfaces
         /// </summary>
         Task SaveChangesAsync();
 
-  
 
+        Task<decimal> GetTotalInventoryValue();
     }
 }

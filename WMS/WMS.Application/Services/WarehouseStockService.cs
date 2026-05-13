@@ -91,13 +91,13 @@ namespace WMS.Application.Services
                 }
                 else
                 {
-                    var newStock =new  AddWarehouseStockDto(transferDto.ToWarehouseID, transferDto.ItemID, transferDto.Quantity, sourceStock.BatchNumber,
-                        sourceStock.ActualCost,sourceStock.ProductionDate,sourceStock.ExpiryDate,DateTime.Now , transferDto.CreatedBy );
+                    var newStock = new AddWarehouseStockDto(transferDto.ToWarehouseID, transferDto.ItemID, transferDto.Quantity, sourceStock.BatchNumber,
+                        sourceStock.ActualCost, sourceStock.ProductionDate, sourceStock.ExpiryDate, DateTime.Now, transferDto.CreatedBy);
 
-                   
-                  
 
-                    await _repository.Add(_mapper.Map<WarehouseStock>(newStock)); 
+
+
+                    await _repository.Add(_mapper.Map<WarehouseStock>(newStock));
 
                 }
 
@@ -117,10 +117,11 @@ namespace WMS.Application.Services
         }
 
 
+        public async Task<decimal> GetTotalInventoryValue()
+        {
+            return await _repository.GetTotalInventoryValue();
 
-
-
-
+        }
 
     }
 }
