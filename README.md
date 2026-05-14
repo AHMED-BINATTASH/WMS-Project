@@ -3,6 +3,7 @@
 A comprehensive Warehouse Management System (WMS) built with a .NET Core backend and a modern React frontend. This application facilitates efficient management of inventory, warehouses, users, and transactions in a warehouse environment.
 
 Demo : http://wms-frontend.runasp.net/
+
 username : binary
 password : 12345678
 
