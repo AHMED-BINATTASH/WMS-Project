@@ -5,6 +5,7 @@ A comprehensive Warehouse Management System (WMS) built with a .NET Core backend
 Demo : http://wms-frontend.runasp.net/
 
 username : binary
+
 password : 12345678
 
 
